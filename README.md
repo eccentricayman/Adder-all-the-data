@@ -1,5 +1,6 @@
 # Adder-all-the-data
 Data Visualization: School vs Substances
+
 Team members: Kevin Zhang, Emma Vukelj, Yvonne Chan, Ayman Ahmed
 
 ## About
