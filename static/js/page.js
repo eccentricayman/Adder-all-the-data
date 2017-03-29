@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
 
 	var states = d3.select("svg").selectAll("path")['_groups'];
-	info = make_test(0,1,.02)
+	info = make_test(0,1,.020)
 	console.log(d3.selectAll("path"))
 
 	d3.selectAll("path")
