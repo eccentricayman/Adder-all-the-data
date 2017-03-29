@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	var get_color = function(percent) {
 		 var val = "#00".concat(Math.round(percent*255).toString(16)).concat("00");
-		 console.log(val);
 		 return val;
 	}
 
