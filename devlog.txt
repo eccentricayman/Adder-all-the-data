@@ -2,3 +2,7 @@ KevinZ -- 2017-03-28 xx:xx
 - Added DESIGN and created Devlog
 emmaV -- 2017-03-28 10:00
 - added start of map svg and hovering/color
+yvonneC -- 2017-03-29 12:15
+- added data files from CORGIS
+kevinZ -- 2017-03-29 12:22
+- moved things around to fit into file hierarchy and created Flask app

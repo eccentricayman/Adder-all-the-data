@@ -10,11 +10,11 @@ def home():
 
 @app.route("/drugs/")
 def drugs():
-    return drugs.get_reports()
+    pass
 
 @app.route("/schoolScores/")
 def school():
-    return school_scores.get_reports()
+    pass
 
 
 if __name__ == "__main__":
