@@ -10,3 +10,5 @@ aymanA -- 2017-03-29 12:29:27 PM
 - added devlogger
 yvonneC -- 2017-03-29 12:26:37 PM
 - added random file
+emmaV -- 2017-03-29 19:07 PM
+- change color of state based on 0-1 number
