@@ -1,7 +1,7 @@
 '''
 Hello student. Thank you for downloading a CORGIS library. However, you do not need to open this library. Instead you should use the following:
 
-    import school_scores
+    import drugs
     
 If you opened the file because you are curious how this library works, then well done! We hope that you find it a useful learning experience. However, you should know that this code is meant to solve somewhat esoteric pedagogical problems, so it is often not best practices. 
 '''
@@ -17,10 +17,10 @@ class _Constants(object):
     Global singleton object to hide some of the constants; some IDEs reveal internal module details very aggressively, and there's no other way to hide stuff.
     '''
     _HEADER = {'User-Agent': 
-              'CORGIS School Scores library for educational purposes'}
+              'CORGIS Drugs library for educational purposes'}
     _PYTHON_3 = _sys.version_info >= (3, 0)
     _TEST = False
-    _HARDWARE = 1000
+    _HARDWARE = 100
 
 if _Constants._PYTHON_3:
     import urllib.request as _request
@@ -35,7 +35,7 @@ class DatasetException(Exception):
     ''' Thrown when there is an error loading the dataset for some reason.'''
     pass
     
-_Constants._DATABASE_NAME = "school_scores.db"
+_Constants._DATABASE_NAME = "data/drugs.db"
 if not _os.access(_Constants._DATABASE_NAME, _os.F_OK):
     raise DatasetException("Error! Could not find a \"{0}\" file. Make sure that there is a \"{0}\" in the same directory as \"{1}.py\"! Spelling is very important here.".format(_Constants._DATABASE_NAME, __name__))
 elif not _os.access(_Constants._DATABASE_NAME, _os.R_OK):
@@ -103,16 +103,16 @@ class _Auxiliary(object):
 
 
 
-def get_all():
+def get_reports():
     """
-    Returns all of the data for every state into a list.
+    Returns all of the reports.
     
     """
     if False:
         # If there was a Test version of this method, it would go here. But alas.
         pass
     else:
-        rows = _Constants._DATABASE.execute("SELECT data FROM school_scores".format(
+        rows = _Constants._DATABASE.execute("SELECT data FROM drugs".format(
             hardware=_Constants._HARDWARE))
         data = [r[0] for r in rows]
         data = [_Auxiliary._byteify(_json.loads(r)) for r in data]
@@ -128,9 +128,9 @@ def _test_interfaces():
     from pprint import pprint as _pprint
     from timeit import default_timer as _default_timer
     # Production test
-    print("Production get_all")
+    print("Production get_reports")
     start_time = _default_timer()
-    result = get_all()
+    result = get_reports()
     
     print("{} entries found.".format(len(result)))
     _pprint(_Auxiliary._guess_schema(result))
