@@ -1,1 +1,2 @@
 03-28-2017 | Kevin Zhang -- Added DESIGN and created Devlog
+03-29-2017 | Emma Vukelj -- Added map svg and some basic corresponding css
