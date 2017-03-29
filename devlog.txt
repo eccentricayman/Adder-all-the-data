@@ -1,2 +1,4 @@
-03-28-2017 | Kevin Zhang -- Added DESIGN and created Devlog
-03-29-2017 | Emma Vukelj -- Added map svg and some basic corresponding css
+KevinZ -- 2017-03-28 xx:xx
+- Added DESIGN and created Devlog
+emmaV -- 2017-03-28 10:00
+- added start of map svg and hovering/color
