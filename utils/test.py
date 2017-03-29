@@ -1,5 +1,6 @@
 import drugs
 import school_scores
+import numpy
 
 #----------------DRUG STUFF------------------------------------
 def convert_drugs():
@@ -21,5 +22,8 @@ def convert_scores():
         ret[litty['State']['Name']] = litty
         print ret[litty['State']['Name']]
         print "\n\n"
+
+def corr_coef(drugs, school):
+    return numpy.corrcoef(drugs,school)[0,1]
 
 convert_scores()

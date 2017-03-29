@@ -13,3 +13,5 @@ yvonneC -- 2017-03-29 12:26:37 PM
 emmaV -- 2017-03-29 19:07 PM
 - change color of state based on 0-1 numberemmaV -- 2017-03-29 07:11:38 PM
 - 
+emmaV -- 2017-03-29 07:18:26 PM
+- start corr coef
