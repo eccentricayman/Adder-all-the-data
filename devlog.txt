@@ -17,3 +17,5 @@ emmaV -- 2017-03-29 07:19:03 PM
 - 
 aymanA -- 2017-03-30 12:07:19 PM
 - updated template jquery and script
+aymanA -- 2017-03-30 12:13:31 PM
+- made data work with app.py

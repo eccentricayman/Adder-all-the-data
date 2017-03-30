@@ -1,3 +1,0 @@
-import drugs
-
-print drugs.get_reports()
