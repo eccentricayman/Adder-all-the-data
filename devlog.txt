@@ -15,3 +15,5 @@ emmaV -- 2017-03-29 19:07 PM
 - start correlation coefficient (have to control for length later)
 emmaV -- 2017-03-29 07:19:03 PM
 - 
+aymanA -- 2017-03-30 12:07:19 PM
+- updated template jquery and script
