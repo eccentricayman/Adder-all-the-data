@@ -1,6 +1,6 @@
 import drugs
 import school_scores
-#import numpy
+import numpy
 
 state_codes = {
     'Mississippi': 'MS',
@@ -66,15 +66,15 @@ def convert_drugs(year):
     states = drugs.get_reports()
     ret = {}
     for state in states:
-        print "State: %s"%(state['State'])
+        #print "State: %s"%(state['State'])
         if state['Year'] == year:
-            weighted_data = []
-            ret[state_codes[state['State']]] = weighted_data
-            print state['Totals']['Marijuana']['Used Past Year']['12-17']*1000
-            print state['Totals']['Pain Relievers Abuse Past Year']['12-17']*1000
-            print state['Totals']['Illicit Drugs']['Dependence Past Year']['12-17']*1000
-            print state['Totals']['Alcohol']['Dependence Past Year']['12-17']*1000
+            #ret[state_codes[state['State']]] = weighted_data
+            weighted_data = [state['Totals']['Marijuana']['Used Past Year']['12-17']*1000,
+                    state['Totals']['Pain Relievers Abuse Past Year']['12-17']*1000,
+                    state['Totals']['Illicit Drugs']['Dependence Past Year']['12-17']*1000,
+                    state['Totals']['Alcohol']['Dependence Past Year']['12-17']*1000]
             # find stuff for diff rates, idk why theyre formatted diff :(
+            ret[state_codes[state['State']]] = weighted_data
     return ret
 
 #print convert_drugs()['New York']
@@ -93,16 +93,24 @@ def convert_scores(year):
         weighted_data = []
         for letter in state['GPA']: #FOR EACH GPA
             if letter in let_to_num.keys() and state['Year'] == str(year):
-                math_pt = let_to_num[letter]*200 + int(state['GPA'][letter]['Math'])
-                verbal_pt = let_to_num[letter]*200 + int(state['GPA'][letter]['Verbal'])
+                pt = let_to_num[letter]*400 + int(state['GPA'][letter]['Math']) + int(state['GPA'][letter]['Verbal'])
                 for i in range(0,int(state['GPA'][letter]['Test-takers'])/2): #FOR EACH TEST TAKER
                     # add average
                     # this puts it on 0-100 which i like
-                    weighted_data.append(math_pt)
-                    weighted_data.append(verbal_pt)
+                    weighted_data.append(pt)
+                    #weighted_data.append(verbal_pt)
                 ret[state['State']['Code']] = weighted_data
     return ret
 
+def scale_data(school, drugs):
+    for i in range(len(school)-len(drugs)):
+        drugs.append(drugs[i%len(drugs)])
+
 #convert_scores(2014)['NY']
-print len(convert_scores(2014)['NY'])
-convert_drugs(2014)['NY']
+scores = convert_scores(2014)['NY']
+drugs =convert_drugs(2014)['NY']
+print len(scores)
+scale_data(scores, drugs)
+print len(scores)
+print len(drugs)
+print numpy.corrcoef(drugs,scores)
