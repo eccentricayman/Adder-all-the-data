@@ -26,3 +26,5 @@ aymanA -- 2017-04-01 01:42:04 AM
 - more or less finished design for front page, not responsive though
 emmaV -- 2017-04-01 11:26:28 AM
 - Work on scaling drug data
+emmaV -- 2017-04-01 11:42:53 AM
+- Modularized by year and state for getting corr coef for drugs/school
