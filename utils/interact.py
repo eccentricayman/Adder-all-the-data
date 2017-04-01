@@ -77,6 +77,8 @@ def convert_drugs():
         overall[name][int(state['Year'])] = weighted_data
     return overall
 
+drugs = convert_drugs()
+
 #--------------------------SCHOOL_SCORES---------------------------------
 let_to_num = {'A':4.0, 'B':3.0, 'C':2.0, 'D':1.0, 'F':0.1}
 states_school = school_scores.get_all()
@@ -96,6 +98,10 @@ def convert_scores():
         overall[name][int(state['Year'])] = weighted_data
     return overall
 
+scores = convert_scores()
+
+#==========================CORRELATING===============
+
 def scale_data(school, drugs):
     drugs = sorted(drugs)
     orig_len = len(drugs)
@@ -108,10 +114,10 @@ def scale_data(school, drugs):
 
 def corr(year, state):
     try:
-        drugs = convert_drugs()[state][year]
-        scores = convert_scores()[state][year]
-        drugs = scale_data(scores, drugs)
-        return abs(numpy.corrcoef(scores,drugs)[0][1])
+        this_drugs = drugs[state][year]
+        this_scores = scores[state][year]
+        this_drugs = scale_data(this_scores, this_drugs)
+        return abs(numpy.corrcoef(this_scores,this_drugs)[0][1])
     except:
         return 0.0
 

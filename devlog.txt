@@ -27,3 +27,5 @@ emmaV -- 2017-04-01 11:26:28 AM
 emmaV -- 2017-04-01 11:42:53 AM
 - Modularized by year and state for getting corr coef for drugs/school
 - Make data processing more efficient
+emmaV -- 2017-04-01 01:39:27 PM
+- Made data crunch much more efficient
