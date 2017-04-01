@@ -104,15 +104,17 @@ def convert_scores(year):
 
 def scale_data(school, drugs):
     drugs = sorted(drugs)
-    for s in range(1,len(drugs)):
-        for i in range((len(school)-len(drugs))/(s*len(drugs))):
-            drugs.append(drugs[s])
+    orig_len = len(drugs)
+    for i in range(orig_len):
+        for ctr in range(((len(school)-orig_len)/orig_len)+1):
+            drugs.append(drugs[i])
+    while len(drugs)>len(school):
+        drugs.pop(len(drugs)-1)
+    return drugs
 
 #convert_scores(2014)['NY']
 scores = convert_scores(2014)['NY']
 drugs =convert_drugs(2014)['NY']
-print len(scores)
-scale_data(scores, drugs)
-print len(scores)
-print len(drugs)
-print numpy.corrcoef(scores,drugs)[0][1]
+#print len(scores)
+drugs = scale_data(scores, drugs)
+print abs(numpy.corrcoef(scores,drugs)[0][1])

@@ -24,3 +24,5 @@ emmaV -- 2017-03-30 10:00:20 PM
 - Get school data needed for heatmap and start picking drug data
 aymanA -- 2017-04-01 01:42:04 AM
 - more or less finished design for front page, not responsive though
+emmaV -- 2017-04-01 11:26:28 AM
+- Work on scaling drug data
