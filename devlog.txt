@@ -29,3 +29,5 @@ emmaV -- 2017-04-01 11:42:53 AM
 - Make data processing more efficient
 emmaV -- 2017-04-01 01:39:27 PM
 - Made data crunch much more efficient
+emmaV -- 2017-04-01 02:57:01 PM
+- Integrated heat map back and front end

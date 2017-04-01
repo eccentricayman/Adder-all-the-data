@@ -74,7 +74,7 @@ def convert_drugs():
         state['Totals']['Pain Relievers Abuse Past Year']['12-17']*1000,
         state['Totals']['Illicit Drugs']['Dependence Past Year']['12-17']*1000,
         state['Totals']['Alcohol']['Dependence Past Year']['12-17']*1000]
-        overall[name][int(state['Year'])] = weighted_data
+        overall[name][str(state['Year'])] = weighted_data
     return overall
 
 drugs = convert_drugs()
@@ -95,7 +95,7 @@ def convert_scores():
                 pt = let_to_num[letter]*400 + int(state['GPA'][letter]['Math']) + int(state['GPA'][letter]['Verbal'])
                 for i in range(0,int(state['GPA'][letter]['Test-takers'])/2):
                     weighted_data.append(pt)
-        overall[name][int(state['Year'])] = weighted_data
+        overall[name][str(state['Year'])] = weighted_data
     return overall
 
 scores = convert_scores()
@@ -114,12 +114,23 @@ def scale_data(school, drugs):
 
 def corr(year, state):
     try:
-        this_drugs = drugs[state][year]
-        this_scores = scores[state][year]
+        this_drugs = drugs[state][str(year)]
+        this_scores = scores[state][str(year)]
         this_drugs = scale_data(this_scores, this_drugs)
-        return abs(numpy.corrcoef(this_scores,this_drugs)[0][1])
+        r = abs(numpy.corrcoef(this_scores,this_drugs)[0][1])
+        if not isinstance(r, float):
+            return 0.0
+        else:
+            return r
     except:
         return 0.0
 
-for state in state_codes:
-    print corr(2014, state_codes[state])
+def state_corrs(year):
+    ret = {}
+    for state in state_codes:
+        num = corr(year, state_codes[state])
+        print "num %s type %s"%(str(num), type(num))
+        if numpy.isnan(num):
+            num = 0.0
+        ret[state_codes[state]] = num
+    return ret
