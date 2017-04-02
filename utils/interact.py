@@ -106,3 +106,8 @@ def convert_scores(year):
 #convert_scores(2014)['NY']
 print len(convert_scores(2014)['NY'])
 convert_drugs(2014)['NY']
+
+
+def find_scores(state):
+    states = school_scores.get_all()
+    
