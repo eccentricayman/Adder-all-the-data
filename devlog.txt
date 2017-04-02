@@ -9,15 +9,25 @@ kevinZ -- 2017-03-29 12:22
 aymanA -- 2017-03-29 12:29:27 PM
 - added devlogger
 yvonneC -- 2017-03-29 12:26:37 PM
-- added random file
+- added interact.py(used to be test.py) for retrieval of database info
 emmaV -- 2017-03-29 19:07 PM
-- change color of state based on 0-1 numberemmaV -- 2017-03-29 07:11:38 PM
+- change color of state based on 0-1 number
+emmaV -- 2017-03-29 07:11:38 PM
 - start correlation coefficient (have to control for length later)
-emmaV -- 2017-03-29 07:19:03 PM
-- 
 aymanA -- 2017-03-30 12:07:19 PM
 - updated template jquery and script
 aymanA -- 2017-03-30 12:13:31 PM
 - made data work with app.py
 emmaV -- 2017-03-30 10:00:20 PM
 - Get school data needed for heatmap and start picking drug data
+aymanA -- 2017-04-01 01:42:04 AM
+- more or less finished design for front page, not responsive though
+emmaV -- 2017-04-01 11:26:28 AM
+- Work on scaling drug data
+emmaV -- 2017-04-01 11:42:53 AM
+- Modularized by year and state for getting corr coef for drugs/school
+- Make data processing more efficient
+emmaV -- 2017-04-01 01:39:27 PM
+- Made data crunch much more efficient
+emmaV -- 2017-04-01 02:57:01 PM
+- Integrated heat map back and front end

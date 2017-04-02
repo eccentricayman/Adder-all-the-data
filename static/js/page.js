@@ -10,15 +10,40 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
 
 	var get_color = function(percent) {
-		 var val = "#00".concat(Math.round(percent*255).toString(16)).concat("00");
-		 return val;
+		if ((percent==0) || (percent==null)) {
+			return "#ffffff";
+		}
+		var val = "#".concat(Math.round(percent*250).toString(16)).concat("ff").concat(Math.round(percent*250).toString(16))
+		//console.log(percent.toString().concat("\n").concat(val.toString()).concat("\n"));
+		return val;
 	}
 
-	var states = d3.select("svg").selectAll("path")['_groups'];
-	info = make_test(0,1,.020)
-	console.log(d3.selectAll("path"))
+	$.ajax({
+		url: '/corrs/',
+		type: 'POST',
+		data: {},
+		success: function(i){
+			var info = JSON.parse(i)
+			keys = Object.keys(info)
 
-	d3.selectAll("path")
-		.data(info)
-		.attr("fill", function(d) { return get_color(d); })
-})
+			var ctr = 0;
+			for (ctr=0; ctr<keys.length; ctr++) {
+				id = "#" + keys[ctr];
+				if (id=="#GA") {
+					console.log(info[keys[ctr]])
+				}
+				d3.selectAll(id)
+				.data([info[keys[ctr]]])
+				//.attr("fill", function(d) { return get_color(d); })
+			}
+
+			d3.selectAll("path")
+			.attr("fill", function(d) { 
+				return get_color(d);
+			})
+
+			d3.select("#path67")
+			.attr("fill", "none")
+		}
+	})
+});
