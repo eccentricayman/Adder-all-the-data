@@ -48,7 +48,7 @@ path, circle {
 path:hover, circle:hover {
     cursor: pointer;
     transition: 0.75s stroke;
-    stroke: red;
+    stroke: #222222;
     stroke-width: 5px;
 }
 

@@ -31,3 +31,5 @@ emmaV -- 2017-04-01 01:39:27 PM
 - Made data crunch much more efficient
 emmaV -- 2017-04-01 02:57:01 PM
 - Integrated heat map back and front end
+aymanA -- 2017-04-02 07:49:03 PM
+- fixed legend colors and highlight
