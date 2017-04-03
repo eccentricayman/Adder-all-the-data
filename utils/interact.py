@@ -1,6 +1,6 @@
 import drugs
 import school_scores
-#import numpy
+import numpy
 
 state_codes = {
     'Mississippi': 'MS',
@@ -77,7 +77,7 @@ def convert_drugs():
         overall[name][str(state['Year'])] = weighted_data
     return overall
 
-#drugs = convert_drugs()
+
 
 def find_state_drugs( code ):
     state = ""
@@ -216,6 +216,8 @@ def find_national_scores():
 #find_scores( 'NY' )
 
 #==========================CORRELATING===============
+
+drugs = convert_drugs()
 
 def scale_data(school, drugs):
     drugs = sorted(drugs)
