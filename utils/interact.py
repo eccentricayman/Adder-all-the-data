@@ -77,8 +77,59 @@ def convert_drugs():
         overall[name][str(state['Year'])] = weighted_data
     return overall
 
-drugs = convert_drugs()
+#drugs = convert_drugs()
 
+def find_state_drugs( code ):
+    state = ""
+    for stateName, cde in state_codes.items():
+        if cde == code:
+            state = stateName
+
+    getAll = drugs.get_reports()
+    returnVal = { }
+    for year in range(2002, 2015, 1):
+        itemDict = {}
+        returnVal[ str(year) ] = itemDict
+    for item in getAll:
+        if item['State'] == state:
+            itemDict = returnVal[ str(item['Year']) ]
+            itemDict['Rates'] = {}
+            itemDict['Rates']['Marijuana'] = item['Rates']['Marijuana']['Used Past Year']['12-17']
+            itemDict['Rates']['Illicit Drugs'] = item['Rates']['Illicit Drugs']['Dependence Past Year']['12-17']
+            itemDict['Rates']['Alcohol'] = item['Rates']['Alcohol']['Dependence Past Year']['12-17']
+    return returnVal
+
+def find_national_drugs():
+    getAll = drugs.get_reports()
+    returnVal = { }
+    for year in range(2002, 2015, 1):
+        itemDict = {}
+        itemDict['Sums'] = { }
+        itemDict['Sums']['Marijuana'] = 0
+        itemDict['Sums']['Illicit Drugs'] = 0
+        itemDict['Sums']['Alcohol'] = 0
+        itemDict['Sums']['Population'] = 0
+        itemDict['Rates'] = { }
+        itemDict['Rates']['Marijuana'] = 0
+        itemDict['Rates']['Illicit Drugs'] = 0
+        itemDict['Rates']['Alcohol'] = 0
+        returnVal[ str(year) ] = itemDict
+    for item in getAll:
+        itemDict = returnVal[ str(item['Year']) ]
+        itemDict['Sums']['Marijuana'] += item['Totals']['Marijuana']['Used Past Year']['12-17']*10
+        itemDict['Sums']['Illicit Drugs'] += item['Totals']['Illicit Drugs']['Dependence Past Year']['12-17']*10
+        itemDict['Sums']['Alcohol'] += item['Totals']['Alcohol']['Dependence Past Year']['12-17']*10
+        itemDict['Sums']['Population'] += item['Population']['12-17']
+    for key in returnVal.keys():
+        itemDict = returnVal[key]
+        itemDict['Rates']['Marijuana'] = round( itemDict['Sums']['Marijuana'] * 10000.0 / itemDict['Sums']['Population'] ) / 100
+        itemDict['Rates']['Illicit Drugs'] = round( itemDict['Sums']['Illicit Drugs'] * 10000.0 / itemDict['Sums']['Population'] ) / 100
+        itemDict['Rates']['Alcohol'] = round( itemDict['Sums']['Alcohol'] * 10000.0 / itemDict['Sums']['Population'] ) / 100
+
+    return returnVal
+
+#print find_national_drugs()
+#print find_state_drugs( 'CA' )
 #--------------------------SCHOOL_SCORES---------------------------------
 let_to_num = {'A':4.0, 'B':3.0, 'C':2.0, 'D':1.0, 'F':0.1}
 states_school = school_scores.get_all()
@@ -104,13 +155,66 @@ scores = convert_scores()
 #print len(convert_scores(2014)['NY'])
 #convert_drugs(2014)['NY']
 
-def find_scores(state):
-    states = school_scores.get_all()
-    print states 
+def find_state_scores(state):
+    getAll = school_scores.get_all()
     returnVal = { }
+    for year in range(2005, 2016, 1):
+        itemDict = { }
+        returnVal[ str(year) ] = itemDict
+    for item in getAll:
+        if item['State']['Code'] == state:
+            itemDict = returnVal[str(item['Year'])]
+            itemDict['State'] = state
+            itemDict['Year'] = item['Year']
+            itemDict['Averages'] = {}
+            itemDict['Averages']['SAT'] = item['Total']['Verbal'] + item['Total']['Math']
+            itemDict['Averages']['GPA'] = calculate_GPA( item['GPA'] )
+    return returnVal
 
-find_scores( 'NY' )
+def calculate_GPA( insertDict ):
+    numStudents = 0
+    calculateSum = 0
+    checkerList = ['A', 'B', 'C']
+    for checker in checkerList:
+        numStudents += insertDict[checker]['Test-takers']
+        calculateSum += ( 69 - ord(checker) ) * insertDict[checker]['Test-takers']
+    return round( calculateSum * 1.0 / numStudents * 10 ) / 10
+
+
+def find_national_scores():
+    getAll = school_scores.get_all()
+    returnVal = { }  
+    for year in range(2005, 2016, 1):
+        itemDict = {}
+        itemDict['Sums'] = { }
+        itemDict['Sums']['SAT'] = 0
+        itemDict['Sums']['GPA'] = 0
+        itemDict['Sums']['SAT-Total'] = 0
+        itemDict['Sums']['GPA-Total'] = 0
+        itemDict['Averages'] = { }
+        itemDict['Averages']['SAT'] = 0
+        itemDict['Averages']['GPA'] = 0
+        returnVal[ str(year) ] = itemDict
+    for item in getAll:
+        itemDict = returnVal[ item['Year'] ]
+        itemDict['Sums']['SAT'] += (item['Total']['Verbal'] + item['Total']['Math']) * item['Total']['Test-takers']
+        itemDict['Sums']['SAT-Total'] += item['Total']['Test-takers']
+
+        ##GPA calcs
+        checkerList = ['A', 'B', 'C']
+        for checker in checkerList:
+            itemDict['Sums']['GPA'] += ( 69 - ord(checker) ) * item['GPA'][checker]['Test-takers']
+            itemDict['Sums']['GPA-Total'] += item['GPA'][checker]['Test-takers']
+
+    for key in returnVal.keys():
+        itemDict = returnVal[key]
+        itemDict['Averages']['SAT'] = round( itemDict['Sums']['SAT'] * 1.0 / itemDict['Sums']['SAT-Total'] * 10 ) / 10
+        itemDict['Averages']['GPA'] = round( itemDict['Sums']['GPA'] * 1.0 / itemDict['Sums']['GPA-Total'] * 10 ) / 10
+        
+    return returnVal
     
+#find_scores( 'NY' )
+
 #==========================CORRELATING===============
 
 def scale_data(school, drugs):

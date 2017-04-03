@@ -33,3 +33,5 @@ emmaV -- 2017-04-01 02:57:01 PM
 - Integrated heat map back and front end
 aymanA -- 2017-04-02 07:49:03 PM
 - fixed legend colors and highlight
+kevinZ -- 2017-04-02 11:45:59 PM
+- I added all the functions that will retrieve the necessary data for making charts in the SVG. I'll be working on that tound a bug with the data files ( and their documentation ). The drugs data is not in thousands, but merely in tens. Either that, or the population data is wrong
