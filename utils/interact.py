@@ -1,6 +1,6 @@
 import drugs
 import school_scores
-import numpy
+#import numpy
 
 state_codes = {
     'Mississippi': 'MS',
@@ -106,8 +106,11 @@ scores = convert_scores()
 
 def find_scores(state):
     states = school_scores.get_all()
-    
+    print states 
+    returnVal = { }
 
+find_scores( 'NY' )
+    
 #==========================CORRELATING===============
 
 def scale_data(school, drugs):
