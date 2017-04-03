@@ -39,3 +39,5 @@ kevinZ -- 2017-04-03 12:15:24 PM
 - Added a route to get nationalData into the JS 
 aymanA -- 2017-04-03 11:59:24 AM
 - why does the center tag work... also @chrome
+aymanA -- 2017-04-03 12:27:39 PM
+- fixed the darnedest 0x0 svgee

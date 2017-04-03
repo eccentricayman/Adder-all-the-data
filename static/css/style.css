@@ -16,6 +16,8 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-flow: row wrap;
+    height: 100vh;
     text-align: center;
     padding: 0;
     margin: 0;
@@ -23,6 +25,8 @@ html, body {
 }
 
 #us-map {
+    height: 90vh;
+    flex-grow: 1;
     text-align: center;
     overflow: hidden;
 }
@@ -32,7 +36,7 @@ html, body {
 }
 
 path, circle {
-    stroke: white;
+    stroke: #999999;
     stroke-width: 2px;
     stroke-linejoin: round;
 }
@@ -46,7 +50,7 @@ path, circle {
 path:hover, circle:hover {
     cursor: pointer;
     transition: 0.75s stroke;
-    stroke: #222222;
+    stroke: black;
     stroke-width: 5px;
 }
 
