@@ -14,8 +14,8 @@ def corrs():
 @app.route("/nationalData/", methods=['GET'])
 def nationalData():
     data = { }
-    data['Drugs'] = find_national_drugs()
-    data['Scores'] = find_national_scores()
+    data['Drugs'] = interact.find_national_drugs()
+    data['Scores'] = interact.find_national_scores()
     return json.dumps( data ) 
 
 if __name__ == "__main__":
