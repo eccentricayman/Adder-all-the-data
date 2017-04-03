@@ -9,16 +9,14 @@ def home():
 
 @app.route("/corrs/", methods=['POST'])
 def corrs():
-	return json.dumps(interact.state_corrs(2014))
+    return json.dumps(interact.state_corrs(2014))
 
-@app.route("/drugs/")
-def drugs():
-    pass
-
-@app.route("/schoolScores/")
-def school():
-    pass
-
+@app.route("/nationalData/", methods=['GET'])
+def nationalData():
+    data = { }
+    data['Drugs'] = find_national_drugs()
+    data['Scores'] = find_national_scores()
+    return json.dumps( data ) 
 
 if __name__ == "__main__":
     app.debug == True

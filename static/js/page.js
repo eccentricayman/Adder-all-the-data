@@ -1,13 +1,7 @@
-document.addEventListener("DOMContentLoaded", function(e) {
+var nationalData;
+var stateData;
 
-	var make_test = function(start, stop, step) {
-		var ret = [];
-		while (start<stop) {
-			ret.push(start);
-			start += step;
-		}
-		return ret;
-	}
+document.addEventListener("DOMContentLoaded", function(e) {
 
 	var get_color = function(percent) {
 		if ((percent==0) || (percent==null)) {
@@ -46,4 +40,9 @@ document.addEventListener("DOMContentLoaded", function(e) {
 			.attr("fill", "none")
 		}
 	})
+
+    $.get("/nationalData", { }, function(d){
+        nationalData = d;
+    });
+    
 });
