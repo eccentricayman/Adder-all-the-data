@@ -217,7 +217,7 @@ def find_national_scores():
 
 #==========================CORRELATING===============
 
-drugs = convert_drugs()
+converted_drugs = convert_drugs()
 
 def scale_data(school, drugs):
     drugs = sorted(drugs)
@@ -231,7 +231,7 @@ def scale_data(school, drugs):
 
 def corr(year, state):
     try:
-        this_drugs = drugs[state][str(year)]
+        this_drugs = converted_drugs[state][str(year)]
         this_scores = scores[state][str(year)]
         this_drugs = scale_data(this_scores, this_drugs)
         r = abs(numpy.corrcoef(this_scores,this_drugs)[0][1])
