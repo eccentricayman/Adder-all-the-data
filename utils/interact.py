@@ -128,8 +128,8 @@ def find_national_drugs():
 
     return returnVal
 
-print find_national_drugs()
-print find_state_drugs( 'CA' )
+#print find_national_drugs()
+#print find_state_drugs( 'CA' )
 #--------------------------SCHOOL_SCORES---------------------------------
 let_to_num = {'A':4.0, 'B':3.0, 'C':2.0, 'D':1.0, 'F':0.1}
 states_school = school_scores.get_all()
