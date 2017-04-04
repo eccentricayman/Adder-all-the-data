@@ -128,8 +128,8 @@ def find_national_drugs():
 
     return returnVal
 
-#print find_national_drugs()
-#print find_state_drugs( 'CA' )
+print find_national_drugs()
+print find_state_drugs( 'CA' )
 #--------------------------SCHOOL_SCORES---------------------------------
 let_to_num = {'A':4.0, 'B':3.0, 'C':2.0, 'D':1.0, 'F':0.1}
 states_school = school_scores.get_all()
@@ -150,10 +150,6 @@ def convert_scores():
     return overall
 
 scores = convert_scores()
-
-#convert_scores(2014)['NY']
-#print len(convert_scores(2014)['NY'])
-#convert_drugs(2014)['NY']
 
 def find_state_scores(state):
     getAll = school_scores.get_all()
@@ -212,8 +208,6 @@ def find_national_scores():
         itemDict['Averages']['GPA'] = round( itemDict['Sums']['GPA'] * 1.0 / itemDict['Sums']['GPA-Total'] * 10 ) / 10
         
     return returnVal
-    
-#find_scores( 'NY' )
 
 #==========================CORRELATING===============
 
