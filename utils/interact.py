@@ -61,6 +61,11 @@ state_codes = {
     'Delaware': 'DE',
     'Guam': 'GU'
 }
+
+def get_state_codes():
+    return state_codes
+
+
 #---------------------------DRUG STUFF------------------------------------
 states_drugs = drugs.get_reports()
 

@@ -1,4 +1,7 @@
 var nationalData;
+var fullSVG;
+
+var map = jQuery.extend(true, {}, originalObject);
 
 document.addEventListener("DOMContentLoaded", function(e) {
 
@@ -60,7 +63,6 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		    return a;
 		});
 	}
-
 	var transitionTest = function( scale ) {
 	    us.selectAll("div")
 		.data(values)
