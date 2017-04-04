@@ -1,6 +1,3 @@
-var nationalData;
-var stateData;
-
 document.addEventListener("DOMContentLoaded", function(e) {
 
     var get_color = function(percent) {
@@ -53,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	    var us = d3.select("id")//to be sorted out later)
 	    var stats = function() {
 		us.selectAll("div")
-		    .data(info)
+		    .data(values)
 		    .enter()
 		    .append("div")
 		    .style("width", function(i){
@@ -66,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 	    var transitionTest = function( scale ) {
 		us.selectAll("div")
-		    .data(info)
+		    .data(values)
 		    .transition()
 		    .duration(2000)
 		    .style("width", function(b) {
@@ -84,7 +81,36 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	type: 'GET',
 	data: {},
 	success: function(d){
-            var info = 
+            var info = JSON.parse(d)
+	    keys = Object.keys(info)
+	    values = Object.values(info)
+
+	    var state = d3.select("id")//to be sorted out later)
+	    var stats = function() {
+		state.selectAll("div")
+		    .data(values)
+		    .enter()
+		    .append("div")
+		    .style("width", function(i){
+			return i*30 + "px";
+		    })
+		    .text( function(a){
+			return a;
+		    });
+	    }
+
+	    var transitionTest = function( scale ) {
+		state.selectAll("div")
+		    .data(values)
+		    .transition()
+		    .duration(2000)
+		    .style("width", function(b) {
+			return b * scale + "px";
+		    });
+	    };
+
+	    stats();
+	    transitionTest();
 	}
     });
     

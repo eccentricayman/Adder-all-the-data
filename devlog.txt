@@ -45,3 +45,5 @@ aymanA -- 2017-04-03 12:27:39 PM
 - fixed the darnedest 0x0 svgee
 yvonneC -- 2017-04-04 07:29:28 AM
 -continued work on d3 for states and national averages
+yvonneC -- 2017-04-04 11:40:50 AM
+-ran into some problems showing d3... will ask for help
