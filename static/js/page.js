@@ -1,4 +1,6 @@
 var nationalData;
+var fullSVG;
+
 
 document.addEventListener("DOMContentLoaded", function(e) {
 
@@ -45,11 +47,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
         nationalData = JSON.parse(d)
     });
 
+  
+    
     
     
 });
 
-var moveThings(){
+var moveThings(){   
     
 };
 
