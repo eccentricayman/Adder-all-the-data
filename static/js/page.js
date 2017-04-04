@@ -43,86 +43,75 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     $.get( "/nationalData", {}, function(d){
         nationalData = JSON.parse(d)
-    });
-
-    
-    
-});
-
-var moveThings(){
-    
-};
-
-
-var renderData(){
-
-    nationalKeys = Object.keys(nationalData)
+	nationalKeys = Object.keys(nationalData)
 	nationalValues = Object.values(nationalData)
-	var us = d3.select("id")//to be sorted out later)
+
+	var us = d3.select("id")//??
+	
 	var stats = function() {
-		us.selectAll("div")
-		    .data(values)
-		    .enter()
-		    .append("div")
-		    .style("width", function(i){
-			    return i*30 + "px";
-		    })
-		    .text( function(a){
-			    return a;
-		    });
+	    us.selectAll("div")
+		.data(values)
+		.enter()
+		.append("div")
+		.style("height", function(i){
+		    return i*30 + "px";
+		})
+		.text( function(a){
+		    return a;
+		});
 	}
 
 	var transitionTest = function( scale ) {
-		us.selectAll("div")
-		    .data(values)
-		    .transition()
-		    .duration(2000)
-		    .style("width", function(b) {
-			return b * scale + "px";
-		    });
+	    us.selectAll("div")
+		.data(values)
+		.transition()
+		.duration(2000)
+		.style("height", function(b) {
+		    return b * scale + "px";
+		});
 	};
-
-    
-    $.ajax({
-	url: "/stateData/",
-	type: 'GET',
-	data: {},
-	success: function(d){
-        var info = JSON.parse(d)
-	    keys = Object.keys(info)
-	    values = Object.values(info)
-
-	    var state = d3.select("id")//to be sorted out later)
-	    var stats = function() {
-		state.selectAll("div")
-		    .data(values)
-		    .enter()
-		    .append("div")
-		    .style("width", function(i){
-			return i*30 + "px";
-		    })
-		    .text( function(a){
-			return a;
-		    });
-	    }
-
-	    var transitionTest = function( scale ) {
-		state.selectAll("div")
-		    .data(values)
-		    .transition()
-		    .duration(2000)
-		    .style("width", function(b) {
-			return b * scale + "px";
-		    });
-	    };
-
-	    stats();
-	    transitionTest();
-	}
-    });
-    
-    
-    
+	
 	stats();
 	transitionTest();
-}
+    });
+
+    var renderData = function(d){
+	var info = JSON.parse(d[0])
+	stateKeys = Object.keys(info)
+	stateValues = Object.values(info)
+
+	for stateName, cde in d[1].items():
+        if cde == :
+            id = stateName
+	var state = d3.select(id)
+	
+	var stats = function() {
+	    state.selectAll("div")
+		.data(values)
+		.enter()
+		.append("div")
+		.style("height", function(i){
+		    return i*30 + "px";
+		})
+		.text( function(a){
+		    return a;
+		});
+	}
+
+	var transitionTest = function( scale ) {
+	    state.selectAll("div")
+		.data(values)
+		.transition()
+		.duration(2000)
+		.style("height", function(b) {
+		    return b * scale + "px";
+		});
+	};
+	
+	stats();
+	transitionTest();
+    };
+
+    
+});
+
