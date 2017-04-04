@@ -1,3 +1,5 @@
+var nationalData;
+
 document.addEventListener("DOMContentLoaded", function(e) {
 
     var get_color = function(percent) {
@@ -38,30 +40,39 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
     })
 
-    $.ajax({
-	url: "/nationalData/",
-	type: 'GET',
-	data: {},
-	success: function(d){
-            var info = JSON.parse(d)
-	    keys = Object.keys(info)
-	    values = Object.values(info)
 
-	    var us = d3.select("id")//to be sorted out later)
-	    var stats = function() {
+    $.get( "/nationalData", {}, function(d){
+        nationalData = JSON.parse(d)
+    });
+
+    
+    
+});
+
+var moveThings(){
+    
+};
+
+
+var renderData(){
+
+    nationalKeys = Object.keys(nationalData)
+	nationalValues = Object.values(nationalData)
+	var us = d3.select("id")//to be sorted out later)
+	var stats = function() {
 		us.selectAll("div")
 		    .data(values)
 		    .enter()
 		    .append("div")
 		    .style("width", function(i){
-			return i*30 + "px";
+			    return i*30 + "px";
 		    })
 		    .text( function(a){
-			return a;
+			    return a;
 		    });
-	    }
+	}
 
-	    var transitionTest = function( scale ) {
+	var transitionTest = function( scale ) {
 		us.selectAll("div")
 		    .data(values)
 		    .transition()
@@ -69,19 +80,15 @@ document.addEventListener("DOMContentLoaded", function(e) {
 		    .style("width", function(b) {
 			return b * scale + "px";
 		    });
-	    };
+	};
 
-	    stats();
-	    transitionTest();
-	}
-    });
-
+    
     $.ajax({
 	url: "/stateData/",
 	type: 'GET',
 	data: {},
 	success: function(d){
-            var info = JSON.parse(d)
+        var info = JSON.parse(d)
 	    keys = Object.keys(info)
 	    values = Object.values(info)
 
@@ -114,4 +121,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
     });
     
-});
+    
+    
+	stats();
+	transitionTest();
+}

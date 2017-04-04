@@ -16,15 +16,15 @@ def nationalData():
     data = { }
     data['Drugs'] = interact.find_national_drugs()
     data['Scores'] = interact.find_national_scores()
-    print json.dumps( data)
+    #print json.dumps( data)
     return json.dumps( data )
 
-@app.route("/stateData/", methods=['GET'])
-def stateData():
+@app.route("/stateData/<state>", methods=['GET'])
+def stateData(state):
     data = {}
-    data['Drugs'] = interact.find_state_drugs()
-    data['Scores'] = interact.find_state_scores()
-    print json.dumps(data)
+    data['Drugs'] = interact.find_state_drugs(state)
+    data['Scores'] = interact.find_state_scores(state)
+    #print json.dumps(data)
     return json.dumps( data ) 
 
 if __name__ == "__main__":
