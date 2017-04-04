@@ -47,3 +47,5 @@ yvonneC -- 2017-04-04 07:29:28 AM
 -continued work on d3 for states and national averages
 yvonneC -- 2017-04-04 11:40:50 AM
 -ran into some problems showing d3... will ask for help
+aymanA -- 2017-04-04 12:27:58 PM
+- no moar animatino.js"
