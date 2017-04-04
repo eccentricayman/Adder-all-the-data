@@ -1,4 +1,5 @@
 var nationalData;
+var map = jQuery.extend(true, {}, originalObject);
 
 document.addEventListener("DOMContentLoaded", function(e) {
 
