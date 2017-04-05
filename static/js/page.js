@@ -175,8 +175,7 @@ var render = function(e) {
 
     renderData();
     renderUS();
-}
-;
+};
 
 var reset = function(){
 
