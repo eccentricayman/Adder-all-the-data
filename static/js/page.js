@@ -68,30 +68,39 @@ var render = function(){
         };
     }
 
+    //Also hide path67 + path58
+    document.getElementById('path67').setAttribute("display", "none")
+    document.getElementById('path58').setAttribute("display", "none")
+
     //Remove current eventListener
     this.removeEventListener("click", render )
 
     //Add new eventListener
     this.addEventListener("click", reset )
 
-    //Move the state into proper spot. Also, add a Text Tag
-    this.setAttribute("transform", function(){
-        //Calculate Transformation
-
+    //Calculate Transformation
+    var trans = function(e){
         //First get Origin Point ( prob not the most accurate point to use. W/e )
-        var coords = this.getAttribute("d").split("l")[0].substring(1).split(',')//Get Rid of the M. I don't need it :D
+        var coords = e.getAttribute("d").split("l")[0].substring(1).split(',')//Get Rid of the M. I don't need it :D
+        
+        var X = Number(coords[0]); 
+        var Y = Number(coords[1]);
+        
+        var finalX = 100 // AYMAN *READ THIS*
+        var finalY = 100 // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
+        console.log(X)
+        return "translate("+(finalX - X + 200)+","+(finalY - Y + 100)+")";
+    };
 
-        var X = coords[0] 
-        var Y = coords[1]
-
-        var finalX = 50 // AYMAN *READ THIS*
-        var finalY = 50 // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
-
-        return "("+finalX-X +","+finalY-Y+")";       
-    });
+    var transform = trans(this);
+    console.log(transform)
+    //Move the state into proper spot. Also, add a Text Tag
+    this.setAttribute("transform", transform );
     var svg = document.getElementById('us-map');
-    var textBox = document.createChildNodeNS(xmlns, "text");
+    var textBox = document.createElementNS(xmlns, "text");
     textBox.innerHTML = this.getAttribute("data-info");
+    textBox.setAttribute("x", 200)
+    textBox.setAttribute("y", 100)
     //textBox.setAttribute("x")
     svg.appendChild( textBox );
 
@@ -100,7 +109,26 @@ var render = function(){
 
 
 var reset = function(){
-    
+
+    //Loop through all the states, hiding them one by one
+    for( i=0; i < states.length; i++){
+        if( states[i].getAttribute('id') != this.getAttribute('id') ){
+            states[i].setAttribute("display", "initial"); 
+        };
+    }
+
+    //Also hide path67 + path58
+    document.getElementById('path67').setAttribute("display", "initial")
+    document.getElementById('path58').setAttribute("display", "initial")
+
+    //Remove current eventListener
+    this.removeEventListener("click", reset )
+
+    //Add new eventListener
+    this.addEventListener("click", render )
+
+    //undo Transformation
+    this.removeAttribute("transform")
 }
 
 
