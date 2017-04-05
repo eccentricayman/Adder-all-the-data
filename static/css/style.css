@@ -100,18 +100,6 @@ td {
     font-family: 'Open Sans', 400;
 }
 
-table {
-    display: none;
-} 
-
-#table-heading {
-    display: none;
-}
-
-#state-table-heading {
-    display: none;
-}
-
 #table-heading, #state-table-heading, table {
     padding-left: 1%;
 }

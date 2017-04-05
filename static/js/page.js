@@ -15,6 +15,8 @@ var xmlns = "http://www.w3.org/2000/svg";
 var map = document.getElementById("clone").cloneNode(true);
 var defaultTable = document.getElementById("table-data").cloneNode(true);
 
+$("#table-data").css('display', 'none');
+
 var renderColor = function(e) {
     
     var get_color = function(percent) {
@@ -141,9 +143,7 @@ var render = function(e) {
     currentState.addEventListener("click", reset);
 
     //table hide and reveal
-    $("table").css("display", "block");
-    $("#table-heading").css("display", "block");
-    $("#state-table-heading").css("display", "block");
+    $("#table-data").css("display", "block");
 
     //kevins calculations
     // //Calculate Transformation
@@ -337,7 +337,7 @@ var render = function(e) {
 	            });
         };
         
-        var renderScores = function(y, year, scale){
+        var renderScores = function(y, year, scale, scale2){
 	        var us = d3.select(y)
             
 	        us.selectAll("div")
@@ -352,7 +352,12 @@ var render = function(e) {
 		                s = s*15
 		            }
 		            //console.log(i*scale + " px")
-		            return s*scale + "px";
+                    if (s > 500) {
+                        return s*scale2 + "px";
+                    }
+                    else {
+		                return s*scale + "px";
+                    }
 	            })
 	            .text( function(a){
 		            for (s in nationalData['Scores'][year]['Averages']){
@@ -401,6 +406,7 @@ var reset = function(){
     //remove new heading
     document.getElementById("state-heading").parentNode.removeChild(document.getElementById("state-heading"));
 
+
     //map doesnt wanna animate in second time around, ah well
     $(".animation-wrapper").css("opacity", 1);
     renderColor();
@@ -409,7 +415,8 @@ var reset = function(){
     document.getElementById("table-data").parentNode.removeChild(document.getElementById("table-data"));
     $("body").append(defaultTable);
     defaultTable = defaultTable.cloneNode(true);
-    
+
+    $("#table-data").css("display", "none");
     // //Loop through all the states, hiding them one by one
     // for( i=0; i < states.length; i++){
     //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
