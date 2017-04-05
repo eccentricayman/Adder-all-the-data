@@ -61,3 +61,5 @@ aymanA -- 2017-04-05 01:57:28 AM
 - human colons cut in half semicolons fixerino
 aymanA -- 2017-04-05 02:29:54 AM
 - fixed merge and page
+aymanA -- 2017-04-05 03:44:45 AM
+- better svg removal

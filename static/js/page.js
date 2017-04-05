@@ -3,7 +3,7 @@ var stateData;
 var states;
 var xmlns = "http://www.w3.org/2000/svg";
 
-var map = document.getElementById("us-map").cloneNode(true);
+var map = document.getElementById("clone").cloneNode(true);
 
 var renderColor = function(e) {
     
@@ -62,26 +62,36 @@ var renderColor = function(e) {
 
 document.addEventListener("DOMContentLoaded", renderColor);
 
-var render = function(){
+var render = function(e) {
 
     console.log(nationalData);
+
+    //Also hide path67 + path58
+    document.getElementById('us-map').removeChild(document.getElementById('path67'));
+    document.getElementById('path58').parentNode.removeChild(document.getElementById('path58'));
     
     //Loop through all the states, hiding them one by one
-    for( i=0; i < states.length; i++){
-        if( states[i].getAttribute('id') != this.getAttribute('id') ){
-            states[i].setAttribute("display", "none"); 
+    g5 = document.getElementById("g5");
+    var currentState;
+    
+    while (g5.lastElementChild) {
+        console.log("\n\n\n\n" +  g5.lastElementChild.getAttribute('id') + "\n\n\n");
+        if( g5.lastElementChild.getAttribute('id') != e.srcElement.getAttribute('id') ) {
+            g5.removeChild(g5.lastElementChild);
+        }
+        else {
+            currentState = g5.lastElementChild.cloneNode(true);
+            g5.removeChild(g5.lastElementChild);
         }
     }
 
-    //Also hide path67 + path58
-    document.getElementById('path67').setAttribute("display", "none");
-    document.getElementById('path58').setAttribute("display", "none");
+    g5.appendChild(currentState);
 
     //Remove current eventListener
-    this.removeEventListener("click", render);
+    currentState.removeEventListener("click", render);
 
     //Add new eventListener
-    this.addEventListener("click", reset);
+    currentState.addEventListener("click", reset);
 
     //Calculate Transformation
     var trans = function(e){
@@ -119,29 +129,30 @@ var render = function(){
 };
 
 
-var reset = function(){
+//im just readding map lel
+// var reset = function(){
 
-    //Loop through all the states, hiding them one by one
-    for( i=0; i < states.length; i++){
-        if( states[i].getAttribute('id') != this.getAttribute('id') ){
-            states[i].setAttribute("display", "initial"); 
-        }
-    }
+//     //Loop through all the states, hiding them one by one
+//     for( i=0; i < states.length; i++){
+//         if( states[i].getAttribute('id') != this.getAttribute('id') ){
+//             states[i].setAttribute("display", "initial"); 
+//         }
+//     }
 
-    //Also hide path67 + path58
-    document.getElementById('path67').setAttribute("display", "initial");
-    document.getElementById('path58').setAttribute("display", "initial");
+//     //Also hide path67 + path58
+//     document.getElementById('path67').setAttribute("display", "initial");
+//     document.getElementById('path58').setAttribute("display", "initial");
 
-    //Remove current eventListener
-    this.removeEventListener("click", reset);
+//     //Remove current eventListener
+//     this.removeEventListener("click", reset);
 
-    //Add new eventListener
-    this.addEventListener("click", render);
+//     //Add new eventListener
+//     this.addEventListener("click", render);
 
-    //undo Transformation
-    this.removeAttribute("transform");
+//     //undo Transformation
+//     this.removeAttribute("transform");
     
-};
+// };
 
 
 var renderUS = function(){
