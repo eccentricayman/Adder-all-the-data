@@ -83,13 +83,14 @@ var render = function(){
     var trans = function(e){
         //First get Origin Point ( prob not the most accurate point to use. W/e )
         var coords = e.getAttribute("d").split("l")[0].substring(1).split(',')//Get Rid of the M. I don't need it :D
-        
-        var X = Number(coords[0]); 
-        var Y = Number(coords[1]);
+
+        console.log(e.getBoundingClientRect())
+        var X = Number(e.pageX); 
+        var Y = Number(e.pageY);
         
         var finalX = 100 // AYMAN *READ THIS*
         var finalY = 100 // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
-        console.log(X)
+        
         return "translate("+(finalX - X + 200)+","+(finalY - Y + 100)+")";
     };
 
