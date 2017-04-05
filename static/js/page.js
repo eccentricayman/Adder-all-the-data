@@ -3,6 +3,7 @@ $(".animation-wrapper").fadeIn(1500);
 
 var nationalData;
 var stateData;
+
 var states;
 var state;
 var xmlns = "http://www.w3.org/2000/svg";
@@ -52,7 +53,7 @@ var renderColor = function(e) {
     $.get( "/nationalData/", {}, function(d){
         nationalData = JSON.parse(d);
     });
-
+    
     //renderUS();
     
     states = document.getElementById('g5').children;
@@ -66,9 +67,11 @@ var renderColor = function(e) {
 
 document.addEventListener("DOMContentLoaded", renderColor);
 
+renderColor();
+
 var render = function(e) {
 
-    console.log(nationalData);
+    //console.log(nationalData);
 
     //we are removing map entirely, then adding state we want to new svg
     g5 = document.getElementById("g5");
@@ -165,12 +168,7 @@ var render = function(e) {
     // textBox.setAttribute("y", 100);
     // //textBox.setAttribute("x")
     // svg.appendChild( textBox );
-
-
-
-    $.get( "/stateData/", {}, function(d){
-    	stateData = JSON.parse(d)[this.getAttribute('id')];
-    });
+    
     
     /*
     $.get( "/stateData/<state>", {}, function(d){
@@ -180,54 +178,8 @@ var render = function(e) {
     });
     */
 
-    
-    renderData();
-    renderUS();
-}
-;
 
-var reset = function(){
-
-    //readd old map
-    $("body").prepend(map);
-
-    //re deep copy maperino
-    map = document.getElementById("clone").cloneNode(true);
-
-    //delete state
-    document.getElementById("state").parentNode.removeChild(document.getElementById("state"));
-    
-    //remove new heading
-    document.getElementById("state-heading").parentNode.removeChild(document.getElementById("state-heading"));
-
-    //map doesnt wanna animate in second time around, ah well
-    $(".animation-wrapper").css("opacity", 1);
-    renderColor();
-    
-    // //Loop through all the states, hiding them one by one
-    // for( i=0; i < states.length; i++){
-    //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
-    //         states[i].setAttribute("display", "initial"); 
-    //     }
-    // }
-
-    // //Also hide path67 + path58
-    // document.getElementById('path67').setAttribute("display", "initial");
-    // document.getElementById('path58').setAttribute("display", "initial");
-
-    //Remove current eventListener
-    this.removeEventListener("click", reset);
-
-    //Add new eventListener
-    this.addEventListener("click", render);
-
-    // //undo Transformation
-    // this.removeAttribute("transform");
-    
-};
-
-
-var renderUS = function(){
+    var renderUS = function(){
     //console.log(nationalData)
     var nationalKeys = Object.keys(nationalData)
     console.log(nationalData);
@@ -322,91 +274,151 @@ var renderUS = function(){
 
 //renderUS();
 
-var renderData = function(d){
-    var stateKeys = Object.keys(stateData);
-    var stateValues = Object.values(stateData);
+    var renderData = function(s){
 
-    var convert_state = function(state){
-	for (stateName in states){
-	    if (states[stateName]==state){
-		return stateName
-	    }
-	}
-    }
-    
-   var get_drug_values = function(year){
-       values = Object.values(stateData['Scores'][year]['Rates'])
-	return values;
-    }
-    var get_score_values = function(year){
-	values = Object.values(nationalData['Scores'][year]['Averages'])
-	return values;
-    }
-
-    var renderDrugs = function(y, year, scale){
-	var us = d3.select(y)
-
-	us.selectAll("div")
-	    .data(get_drug_values(year))
-	    .enter()
-	    .append("div")
-	    .transition()
-	    .duration(2000)
-	    .style("width", function(i){
-		//console.log(i*scale + " px")
-		return i*scale + "px";
-	    })
-	    .text( function(a){
-		var t = a;
-		var drug;
-		for (drug in nationalData['Drugs'][year]['Rates']){
-		    //console.log(drug)
-		    //console.log(nationalData['Drugs'][year]['Rates'][drug])
-		    if (nationalData['Drugs'][year]['Rates'][drug] == a){
-			console.log(a)
-			t = drug+":"+a;
-		    }
-		}
-		return t;
-	    });
+        $.get("/stateData/", {'state': s}, function(d){
+            stateData = JSON.parse(d);
+        });
+        
+        var stateKeys = Object.keys(stateData);
+        var stateValues = Object.values(stateData);
+        
+        var convert_state = function(state){
+	        for (stateName in states){
+	            if (states[stateName]==state){
+		            return stateName
+	            }
+	        }
+        }
+        
+        var get_drug_values = function(year){
+            values = Object.values(stateData['Scores'][year]['Rates'])
+            console.log(values)
+	        return values;
+        }
+        var get_score_values = function(year){
+	        values = Object.values(nationalData['Scores'][year]['Averages'])
+	        return values;
+        }
+        
+        var renderDrugs = function(y, year, scale){
+	        var us = d3.select(y)
+            
+	        us.selectAll("div")
+	            .data(get_drug_values(year))
+	            .enter()
+	            .append("div")
+	            .transition()
+	            .duration(2000)
+	            .style("width", function(i){
+		            //console.log(i*scale + " px")
+		            return i*scale + "px";
+	            })
+	            .text( function(a){
+		            var t = a;
+		            var drug;
+		            for (drug in nationalData['Drugs'][year]['Rates']){
+		                //console.log(drug)
+		                //console.log(nationalData['Drugs'][year]['Rates'][drug])
+		                if (nationalData['Drugs'][year]['Rates'][drug] == a){
+			                console.log(a)
+			                t = drug+":"+a;
+		                }
+		            }
+		            return t;
+	            });
+        };
+        
+        var renderScores = function(y, year, scale){
+	        var us = d3.select(y)
+            
+	        us.selectAll("div")
+	            .data(get_score_values(year))
+	            .enter()
+	            .append("div")
+	            .transition()
+	            .duration(2000)
+	            .style("width", function(i){
+		            var s = i;
+		            if (i < 5){
+		                s = s*15
+		            }
+		            //console.log(i*scale + " px")
+		            return s*scale + "px";
+	            })
+	            .text( function(a){
+		            for (s in nationalData['Scores'][year]['Averages']){
+		                if (nationalData['Scores'][year]['Averages'][s] == a){
+			                return s+":"+a;
+		                }
+		            }
+		            return a;
+	            });
+        };
+        
+        renderDrugs(s6,2006,30);
+        renderDrugs(s7,2007,30);
+        renderDrugs(s8,2008,30);
+        renderDrugs(s9,2009,30);
+        renderDrugs(s10,2010,30);
+        renderScores(st6,2006,2);
+        renderScores(st7,2007,2);
+        renderScores(st8,2008,2);
+        renderScores(st9,2009,2);
+        renderScores(st10,2010,2);
     };
-
-    var renderScores = function(y, year, scale){
-	var us = d3.select(y)
-
-	us.selectAll("div")
-	    .data(get_score_values(year))
-	    .enter()
-	    .append("div")
-	    .transition()
-	    .duration(2000)
-	    .style("width", function(i){
-		var s = i;
-		if (i < 5){
-		    s = s*15
-		}
-		//console.log(i*scale + " px")
-		return s*scale + "px";
-	    })
-	    .text( function(a){
-		for (s in nationalData['Scores'][year]['Averages']){
-		    if (nationalData['Scores'][year]['Averages'][s] == a){
-			return s+":"+a;
-		    }
-		}
-		return a;
-	    });
-    };
     
-    renderDrugs(s6,2006,30);
-    renderDrugs(s7,2007,30);
-    renderDrugs(s8,2008,30);
-    renderDrugs(s9,2009,30);
-    renderDrugs(s10,2010,30);
-    renderScores(st6,2006,2);
-    renderScores(st7,2007,2);
-    renderScores(st8,2008,2);
-    renderScores(st9,2009,2);
-    renderScores(st10,2010,2);
+    
+    
+    var s = this.getAttribute('id');
+    console.log(stateData)
+    console.log(nationalData)
+    renderData(s);
+    renderUS();
+
+}
+;
+
+var reset = function(){
+
+    //readd old map
+    $("body").prepend(map);
+
+    //re deep copy maperino
+    map = document.getElementById("clone").cloneNode(true);
+
+    //delete state
+    document.getElementById("state").parentNode.removeChild(document.getElementById("state"));
+    
+    //remove new heading
+    document.getElementById("state-heading").parentNode.removeChild(document.getElementById("state-heading"));
+
+    //map doesnt wanna animate in second time around, ah well
+    $(".animation-wrapper").css("opacity", 1);
+    renderColor();
+    
+    // //Loop through all the states, hiding them one by one
+    // for( i=0; i < states.length; i++){
+    //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
+    //         states[i].setAttribute("display", "initial"); 
+    //     }
+    // }
+
+    // //Also hide path67 + path58
+    // document.getElementById('path67').setAttribute("display", "initial");
+    // document.getElementById('path58').setAttribute("display", "initial");
+
+    //Remove current eventListener
+    this.removeEventListener("click", reset);
+
+    //Add new eventListener
+    this.addEventListener("click", render);
+
+    // //undo Transformation
+    // this.removeAttribute("transform");
+    
 };
+
+
+
 

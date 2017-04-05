@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, json
+from flask import Flask, render_template, redirect, url_for, json, request
 from utils import drugs, school_scores, interact
 
 app = Flask(__name__)
@@ -22,12 +22,17 @@ def nationalData():
 @app.route("/stateData/", methods=['GET','POST'])
 def stateData():
     data = {}
+    state = request.args.get('state')
+    data['Drugs'] = interact.find_state_drugs(state)
+    data['Scores'] = interact.find_state_scores(state)
+    '''
     states = interact.get_state_codes()
     for name, state in states.items():
         if state != 'GA':
             data[state] = {}
             data[state]['Drugs'] = interact.find_state_drugs(state)
             data[state]['Scores'] = interact.find_state_scores(state)
+    '''
     #print state
     return json.dumps( data )
 

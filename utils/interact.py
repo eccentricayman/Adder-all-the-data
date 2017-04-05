@@ -211,8 +211,8 @@ def find_national_scores():
 
 #print find_national_drugs()
 #print find_national_scores().keys()
-print find_state_drugs('NY')
-print find_state_scores('NY')
+#print find_state_drugs('NY')
+#print find_state_scores('NY')
 
 #==========================CORRELATING===============
 
