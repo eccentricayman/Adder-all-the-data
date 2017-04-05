@@ -139,6 +139,8 @@ var render = function(e) {
     //Add new eventListener
     currentState.addEventListener("click", reset);
 
+    $("table").css("display", "initial");
+
     //kevins calculations
     // //Calculate Transformation
     // var trans = function(e){
