@@ -170,39 +170,34 @@ var renderUS = function(){
     renderNation(y10,2010,25);
 }
 
+renderUS();
+
 var renderData = function(d){
     var info = JSON.parse(d)
     var stateKeys = Object.keys(info)
     var stateValues = Object.values(info)
 
-    for stateName, cde in d[1].items():
-    if cde == :
-    id = stateName
-    var state = d3.select(id)
-    
-    var stats = function() {
-	state.selectAll("div")
-	    .data(values)
+    //for stateName, cde in d[1].items():
+    //if cde == :
+    //id = stateName
+
+    var stats = function(y, year, scale){
+	var state = d3.select(y)
+
+	us.selectAll("div")
+	    .data(get_values(year))
 	    .enter()
 	    .append("div")
-	    .style("height", function(i){
-		return i*30 + "px";
+	    .transition()
+	    .duration(2000)
+	    .style("width", function(i){
+		//console.log(i*scale + " px")
+		return i*scale + "px";
 	    })
 	    .text( function(a){
 		return a;
 	    });
-    }
-
-    var transitionTest = function( scale ) {
-	state.selectAll("div")
-	    .data(values)
-	    .transition()
-	    .duration(2000)
-	    .style("height", function(b) {
-		return b * scale + "px";
-	    });
     };
     
-    stats();
-    transitionTest();
+    stats(s2,2002,25);
 };
