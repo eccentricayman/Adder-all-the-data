@@ -55,3 +55,5 @@ kevinZ -- 2017-04-04 08:44:19 PM
 - Began to work on js functions that allow for states to start moving
 kevinZ -- 2017-04-04 09:34:04 PM
 - Added the ability to go from the map to the state-based data. Can't get the data in right place, however
+aymanA -- 2017-04-05 01:39:10 AM
+- compartmentalizing js and map clone
