@@ -3,7 +3,6 @@ var stateData;
 var states;
 var xmlns = "http://www.w3.org/2000/svg"
 
-
 document.addEventListener("DOMContentLoaded", function(e) {
     
     var get_color = function(percent) {
@@ -48,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
         nationalData = JSON.parse(d)
     });
 
+    //renderUS();
+    
     states = document.getElementById('g5').children
     for( i =0; i < states.length; i++){
         if( states[i].getAttribute('id') != 'GA' && states[i].getAttribute('id') != 'DC' ){
@@ -60,6 +61,8 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
 var render = function(){
 
+    console.log(nationalData);
+    
     //Loop through all the states, hiding them one by one
     for( i=0; i < states.length; i++){
         if( states[i].getAttribute('id') != this.getAttribute('id') ){
@@ -103,6 +106,11 @@ var render = function(){
     //textBox.setAttribute("x")
     svg.appendChild( textBox );
 
+    $.get( "/stateData/<state>", {}, function(d){
+	stateData = JSON.parse(d)
+    });
+    
+    renderData()
     renderUS();
 }
 
@@ -176,9 +184,6 @@ var renderUS = function(){
 
 //renderUS();
 
-//$.get( "/stateData/", {}, function(d){
-//    stateData = JSON.parse(d)
-//});
 
 var renderData = function(d){
     var info = JSON.parse(d)
