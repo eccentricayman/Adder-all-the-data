@@ -10,7 +10,7 @@ var renderColor = function(e) {
 	    if ((percent==0) || (percent==null)) {
 	        return "#ffffff";
 	    }
-	    var val = "#".concat(Math.round(percent*250).toString(16)).concat("ff").concat(Math.round(percent*250).toString(16))
+	    var val = "#".concat(Math.round(percent*250).toStrireng(16)).concat("ff").concat(Math.round(percent*250).toString(16))
 	    //console.log(percent.toString().concat("\n").concat(val.toString()).concat("\n"));
 	    return val;
     }
