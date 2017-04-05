@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 
     states = document.getElementById('g5').children
     for( i =0; i < states.length; i++){
-        if( states[i].getAttribute('id') != 'GA' || states[i].getAttribute('id') != 'DC' ){
+        if( states[i].getAttribute('id') != 'GA' && states[i].getAttribute('id') != 'DC' ){
             states[i].addEventListener( "click", render ); 
         };
     };
@@ -127,7 +127,9 @@ var reset = function(){
 
     //undo Transformation
     this.removeAttribute("transform")
+    
 }
+
 
 var renderUS = function(){
     var nationalKeys = Object.keys(nationalData)
@@ -175,9 +177,9 @@ var renderData = function(d){
     var stateKeys = Object.keys(info)
     var stateValues = Object.values(info)
 
-    for stateName, cde in d[1].items():
-    if cde == :
-    id = stateName
+    //for stateName, cde in d[1].items():
+    //if cde == :
+    //id = stateName
     var state = d3.select(id)
     
     var stats = function() {
@@ -206,3 +208,4 @@ var renderData = function(d){
     stats();
     transitionTest();
 };
+
