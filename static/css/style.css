@@ -48,11 +48,11 @@ path, circle {
 }
 
 path:hover, circle:hover {
-    cursor: pointer;
-    transition: 0.75s stroke;
-    stroke: black;
-    stroke-width: 5px;
-}
+		cursor: pointer;
+		transition: 0.75s stroke;
+		stroke: black;
+		stroke-width: 5px;
+	    }
 
 .map-legend {
     position: absolute;
@@ -82,4 +82,22 @@ path:hover, circle:hover {
 
 .map-legend-label > #right-legend-label {
     float: right;
+}
+
+.nation div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+
+.state div {
+    font: 10px sans-serif;
+    background-color: pink;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
 }
