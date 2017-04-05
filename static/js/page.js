@@ -5,7 +5,7 @@ var nationalData;
 var stateData;
 
 $.get( "/nationalData/", {}, function(d){
-        nationalData = JSON.parse(d);
+    nationalData = JSON.parse(d);
 });
 
 var states;
@@ -13,6 +13,7 @@ var state;
 var xmlns = "http://www.w3.org/2000/svg";
 
 var map = document.getElementById("clone").cloneNode(true);
+var defaultTable = document.getElementById("table-data").cloneNode(true);
 
 var renderColor = function(e) {
     
@@ -140,9 +141,9 @@ var render = function(e) {
     currentState.addEventListener("click", reset);
 
     //table hide and reveal
-    $("table").css("display", "initial");
-    $("#table-heading").css("display", "initial");
-    $("#state-table-heading").css("display", "initial");
+    $("table").css("display", "block");
+    $("#table-heading").css("display", "block");
+    $("#state-table-heading").css("display", "block");
 
     //kevins calculations
     // //Calculate Transformation
@@ -400,9 +401,9 @@ var reset = function(){
     renderColor();
 
     //hide table on reset
-    $("table").css("display", "none");
-    $("#table-heading").css("display", "none");
-    $("#state-table-heading").css("display", "none");
+    document.getElementById("table-data").parentNode.removeChild(document.getElementById("table-data"));
+    $("body").append(defaultTable);
+    defaultTable = defaultTable.cloneNode(true);
     
     // //Loop through all the states, hiding them one by one
     // for( i=0; i < states.length; i++){
