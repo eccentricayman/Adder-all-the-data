@@ -1,3 +1,6 @@
+//first animation
+$(".animation-wrapper").fadeIn(1500);
+
 var nationalData;
 var stateData;
 var states;
@@ -66,14 +69,10 @@ var render = function(e) {
 
     console.log(nationalData);
 
-    //Also hide path67 + path58
-    document.getElementById('us-map').removeChild(document.getElementById('path67'));
-    document.getElementById('path58').parentNode.removeChild(document.getElementById('path58'));
-    
-    //Loop through all the states, hiding them one by one
+    //we are removing map entirely, then adding state we want to new svg
     g5 = document.getElementById("g5");
     var currentState;
-    
+
     while (g5.lastElementChild) {
         console.log("\n\n\n\n" +  g5.lastElementChild.getAttribute('id') + "\n\n\n");
         if( g5.lastElementChild.getAttribute('id') != e.srcElement.getAttribute('id') ) {
@@ -84,41 +83,88 @@ var render = function(e) {
             g5.removeChild(g5.lastElementChild);
         }
     }
+    var svgRemover = document.getElementById("clone").parentNode;
+    svgRemover.removeChild(document.getElementById("clone"));
 
-    g5.appendChild(currentState);
+    //adding h1
+    var stateHeading = document.createElement("h1");
+    stateHeading.id = "state-heading";
+    stateHeading.innerHTML = currentState.getAttribute('data-info');
+    svgRemover.prepend(stateHeading);
+    
+    var svgAdder = svgRemover.prepend(document.createElementNS(xmlns, "svg"));
+    //only one svg
+    $("svg").attr("id", "state");
 
+    var svg = document.getElementById("state");
+    svg.appendChild(currentState);
+
+    //height 100, scale box
+    var bbox = currentState.getBBox();
+    currentState.setAttribute("transform", "scale(" + (200.0 / bbox.y) + ")");
+
+    /////////////////////////////////////////////////////////////////
+    // KEVIN FIX THIS, BBOX DOESNT WANNA RESCALE, this doesnt work //
+    /////////////////////////////////////////////////////////////////
+    
+    //get smaller scaled bbox
+    bbox = currentState.getBBox();
+
+    //set svg size to new state size
+    svg.setAttribute("width", bbox.x);
+    svg.setAttribute("height", 200);
+
+    //add translate to the scale, and mvoe to top left
+    var transform = currentState.getAttribute("transform") + ',translate(' + (-1 * bbox.x) + "," + (-1 * bbox.y) + ")";
+    currentState.setAttribute("transform", transform);
+
+    ///////////////////////////////////////////////////////
+    // KEVIN UNCOMMENT THE BELOW ONCE YOU GET IT WORKING //
+    ///////////////////////////////////////////////////////
+    
+    //move h1 next to state
+    // bbox = currentState.getBBox();
+    // stateHeading.style.top = (bbox.y / 5.0) + "px";
+    // stateHeading.style.left = bbox.x + 25 + "px";
+    
+    //temp til it works (above)
+    stateHeading.style.right = 0;
+    stateHeading.style.top = 0;
+    stateHeading.style['margin-right'] = "1%";
+    
     //Remove current eventListener
     currentState.removeEventListener("click", render);
 
     //Add new eventListener
     currentState.addEventListener("click", reset);
 
-    //Calculate Transformation
-    var trans = function(e){
-        //First get Origin Point ( prob not the most accurate point to use. W/e )
-        var coords = e.getAttribute("d").split("l")[0].substring(1).split(',');//Get Rid of the M. I don't need it :D
+    //kevins calculations
+    // //Calculate Transformation
+    // var trans = function(e){
+    //     //First get Origin Point ( prob not the most accurate point to use. W/e )
+    //     var coords = e.getAttribute("d").split("l")[0].substring(1).split(',');//Get Rid of the M. I don't need it :D
 
-        console.log(e.getBoundingClientRect());
-        var X = Number(e.pageX); 
-        var Y = Number(e.pageY);
+    //     console.log(e.getBoundingClientRect());
+    //     var X = Number(e.pageX); 
+    //     var Y = Number(e.pageY);
         
-        var finalX = 100; // AYMAN *READ THIS*
-        var finalY = 100; // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
+    //     var finalX = 100; // AYMAN *READ THIS*
+    //     var finalY = 100; // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
         
-        return "translate("+(finalX - X + 200)+","+(finalY - Y + 100)+")";
-    };
+    //     return "translate("+(finalX - X + 200)+","+(finalY - Y + 100)+")";
+    // };
 
-    var transform = trans(this);
-    console.log(transform);
-    //Move the state into proper spot. Also, add a Text Tag
-    this.setAttribute("transform", transform );
-    var svg = document.getElementById('us-map');
-    var textBox = document.createElementNS(xmlns, "text");
-    textBox.innerHTML = this.getAttribute("data-info");
-    textBox.setAttribute("x", 200);
-    textBox.setAttribute("y", 100);
-    //textBox.setAttribute("x")
-    svg.appendChild( textBox );
+    // var transform = trans(this);
+    // console.log(transform);
+    // //Move the state into proper spot. Also, add a Text Tag
+    // this.setAttribute("transform", transform );
+    // var svg = document.getElementById('us-map');
+    // var textBox = document.createElementNS(xmlns, "text");
+    // textBox.innerHTML = this.getAttribute("data-info");
+    // textBox.setAttribute("x", 200);
+    // textBox.setAttribute("y", 100);
+    // //textBox.setAttribute("x")
+    // svg.appendChild( textBox );
 
 
     //$.get( "/stateData/<state>", {}, function(d){
@@ -126,34 +172,49 @@ var render = function(e) {
     // });
     
     //renderData()
-    renderUS();
-};
+    //renderUS();
+}
+;
 
+var reset = function(){
 
-//im just readding map lel
-// var reset = function(){
+    //readd old map
+    $("body").prepend(map);
 
-//     //Loop through all the states, hiding them one by one
-//     for( i=0; i < states.length; i++){
-//         if( states[i].getAttribute('id') != this.getAttribute('id') ){
-//             states[i].setAttribute("display", "initial"); 
-//         }
-//     }
+    //re deep copy maperino
+    map = document.getElementById("clone").cloneNode(true);
 
-//     //Also hide path67 + path58
-//     document.getElementById('path67').setAttribute("display", "initial");
-//     document.getElementById('path58').setAttribute("display", "initial");
-
-//     //Remove current eventListener
-//     this.removeEventListener("click", reset);
-
-//     //Add new eventListener
-//     this.addEventListener("click", render);
-
-//     //undo Transformation
-//     this.removeAttribute("transform");
+    //delete state
+    document.getElementById("state").parentNode.removeChild(document.getElementById("state"));
     
-// };
+    //remove new heading
+    document.getElementById("state-heading").parentNode.removeChild(document.getElementById("state-heading"));
+
+    //map doesnt wanna animate in second time around, ah well
+    $(".animation-wrapper").css("opacity", 1);
+    renderColor();
+    
+    // //Loop through all the states, hiding them one by one
+    // for( i=0; i < states.length; i++){
+    //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
+    //         states[i].setAttribute("display", "initial"); 
+    //     }
+    // }
+
+    // //Also hide path67 + path58
+    // document.getElementById('path67').setAttribute("display", "initial");
+    // document.getElementById('path58').setAttribute("display", "initial");
+
+    //Remove current eventListener
+    this.removeEventListener("click", reset);
+
+    //Add new eventListener
+    this.addEventListener("click", render);
+
+    // //undo Transformation
+    // this.removeAttribute("transform");
+    
+};
 
 
 var renderUS = function(){

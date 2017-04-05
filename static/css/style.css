@@ -52,7 +52,19 @@ path:hover, circle:hover {
 		transition: 0.75s stroke;
 		stroke: black;
 		stroke-width: 5px;
-	    }
+}
+
+#state {
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+#state-heading {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+    font-size: 48px;
+    position: absolute;
+}
 
 .map-legend {
     position: absolute;

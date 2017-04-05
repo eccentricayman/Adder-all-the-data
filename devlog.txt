@@ -65,3 +65,5 @@ aymanA -- 2017-04-05 03:44:45 AM
 - better svg removal
 aymanA -- 2017-04-05 03:47:20 AM
 - merged again :'(
+aymanA -- 2017-04-05 05:17:11 AM
+- finished page transition, bbox sucks and bounding rect also sucks, i can't even
