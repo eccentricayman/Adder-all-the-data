@@ -1,6 +1,7 @@
 var nationalData;
 var stateData;
 var states;
+var state;
 var xmlns = "http://www.w3.org/2000/svg";
 
 var map = document.getElementById("us-map").cloneNode(true);
@@ -111,11 +112,13 @@ var render = function(){
     svg.appendChild( textBox );
 
 
-    //$.get( "/stateData/<state>", {}, function(d){
-    //	stateData = JSON.parse(d)
-    // });
+    $.get( "/stateData/<state>", {}, function(d){
+    	stateData = JSON.parse(d[0])
+	states = d[1]
+	state = d[2]
+    });
     
-    //renderData()
+    renderData()
     renderUS();
 };
 
@@ -242,19 +245,31 @@ var renderUS = function(){
 
 
 var renderData = function(d){
-    var info = JSON.parse(d);
-    var stateKeys = Object.keys(info);
-    var stateValues = Object.values(info);
+    var stateKeys = Object.keys(stateData);
+    var stateValues = Object.values(stateData);
 
-    //for stateName, cde in d[1].items():
-    //if cde == :
-    //id = stateName
+    var convert_state = function(state){
+	for (stateName in states){
+	    if (states[stateName]==state){
+		return stateName
+	    }
+	}
+    }
 
-    var stats = function(y, year, scale){
-	var state = d3.select(y);
+   var get_drug_values = function(year){
+       values = Object.values(stateData['Scores'][year]['Rates'])
+	return values;
+    }
+    var get_score_values = function(year){
+	values = Object.values(nationalData['Scores'][year]['Averages'])
+	return values;
+    }
+
+    var renderDrugs = function(y, year, scale){
+	var us = d3.select(y)
 
 	us.selectAll("div")
-	    .data(get_values(year))
+	    .data(get_drug_values(year))
 	    .enter()
 	    .append("div")
 	    .transition()
@@ -264,10 +279,56 @@ var renderData = function(d){
 		return i*scale + "px";
 	    })
 	    .text( function(a){
+		var t = a;
+		var drug;
+		for (drug in nationalData['Drugs'][year]['Rates']){
+		    //console.log(drug)
+		    //console.log(nationalData['Drugs'][year]['Rates'][drug])
+		    if (nationalData['Drugs'][year]['Rates'][drug] == a){
+			console.log(a)
+			t = drug+":"+a;
+		    }
+		}
+		return t;
+	    });
+    };
+
+    var renderScores = function(y, year, scale){
+	var us = d3.select(y)
+
+	us.selectAll("div")
+	    .data(get_score_values(year))
+	    .enter()
+	    .append("div")
+	    .transition()
+	    .duration(2000)
+	    .style("width", function(i){
+		var s = i;
+		if (i < 5){
+		    s = s*15
+		}
+		//console.log(i*scale + " px")
+		return s*scale + "px";
+	    })
+	    .text( function(a){
+		for (s in nationalData['Scores'][year]['Averages']){
+		    if (nationalData['Scores'][year]['Averages'][s] == a){
+			return s+":"+a;
+		    }
+		}
 		return a;
 	    });
     };
     
-    stats(s2,2002,25);
+    renderDrugs(s6,2006,30);
+    renderDrugs(s7,2007,30);
+    renderDrugs(s8,2008,30);
+    renderDrugs(s9,2009,30);
+    renderDrugs(s10,2010,30);
+    renderScores(st6,2006,2);
+    renderScores(st7,2007,2);
+    renderScores(st8,2008,2);
+    renderScores(st9,2009,2);
+    renderScores(st10,2010,2);
 };
 

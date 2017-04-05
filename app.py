@@ -22,8 +22,11 @@ def nationalData():
 @app.route("/stateData/", methods=['GET'])
 def stateData(state):
     data = {}
+    states = interact.get_state_codes()
     data['Drugs'] = interact.find_state_drugs(state)
     data['Scores'] = interact.find_state_scores(state)
+    print data
+    #print state
     return [json.dumps( data ), states, state]
 
 if __name__ == "__main__":
