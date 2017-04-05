@@ -93,9 +93,18 @@ path:hover, circle:hover {
     color: white;
 }
 
-.state div {
+.scores div {
     font: 10px sans-serif;
     background-color: pink;
+    text-align: right;
+    padding: 3px;
+    margin: 1px;
+    color: white;
+}
+
+.state div {
+    font: 10px sans-serif;
+    background-color: green;
     text-align: right;
     padding: 3px;
     margin: 1px;
