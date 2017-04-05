@@ -214,6 +214,11 @@ def find_national_scores():
         
     return returnVal
 
+#print find_national_drugs()
+#print find_national_scores().keys()
+print find_state_drugs('NY')
+print find_state_scores('NY')
+
 #==========================CORRELATING===============
 
 converted_drugs = convert_drugs()
