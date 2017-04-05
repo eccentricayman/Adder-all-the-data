@@ -399,6 +399,11 @@ var reset = function(){
     $(".animation-wrapper").css("opacity", 1);
     renderColor();
 
+    //hide table on reset
+    $("table").css("display", "none");
+    $("#table-heading").css("display", "none");
+    $("#state-table-heading").css("display", "none");
+    
     // //Loop through all the states, hiding them one by one
     // for( i=0; i < states.length; i++){
     //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
