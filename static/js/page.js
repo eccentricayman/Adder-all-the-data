@@ -1,5 +1,7 @@
 var nationalData;
 var states;
+var xmlns = "http://www.w3.org/2000/svg"
+
 
 document.addEventListener("DOMContentLoaded", function(e) {
     
@@ -85,10 +87,14 @@ var render = function(){
         var finalX = 50 // AYMAN *READ THIS*
         var finalY = 50 // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
 
-        return "("+finalX-X +","+finalY-Y+")"       
+        return "("+finalX-X +","+finalY-Y+")";       
     });
-    var svg = document.getElementById('us-map')
-    
+    var svg = document.getElementById('us-map');
+    var textBox = document.createChildNodeNS(xmlns, "text");
+    textBox.innerHTML = this.getAttribute("data-info");
+    //textBox.setAttribute("x")
+    svg.appendChild( textBox );
+
     
 }
 
