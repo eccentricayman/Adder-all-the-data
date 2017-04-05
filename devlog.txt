@@ -59,3 +59,5 @@ aymanA -- 2017-04-05 01:39:10 AM
 - compartmentalizing js and map clone
 aymanA -- 2017-04-05 01:57:28 AM
 - human colons cut in half semicolons fixerino
+aymanA -- 2017-04-05 02:29:54 AM
+- fixed merge and page
