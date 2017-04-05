@@ -51,3 +51,5 @@ aymanA -- 2017-04-04 12:27:58 PM
 - no moar animatino.js"
 yvonneC -- 2017-04-04 12:40:26 PM
 - reorganized d3 elements, worked on transfering data from interact.py to page.js
+kevinZ -- 2017-04-04 08:44:19 PM
+- Began to work on js functions that allow for states to start moving
