@@ -83,3 +83,5 @@ kevinZ -- 2017-04-05 09:06:27 AM
 - Fixed the issue. Render time takes a while, but who cares !
 aymanA -- 2017-04-05 09:55:21 AM
 - hiding table
+aymanA -- 2017-04-05 10:13:50 AM
+- table styling

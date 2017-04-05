@@ -48,10 +48,10 @@ path, circle {
 }
 
 path:hover, circle:hover {
-		cursor: pointer;
-		transition: 0.75s stroke;
-		stroke: black;
-		stroke-width: 5px;
+	cursor: pointer;
+	transition: 0.75s stroke;
+	stroke: black;
+	stroke-width: 5px;
 }
 
 #state {
@@ -112,6 +112,10 @@ table {
     display: none;
 }
 
+#table-heading, #state-table-heading, table {
+    padding-left: 1%;
+}
+
 .nation div {
     font: 10px sans-serif;
     background-color: steelblue;
@@ -138,7 +142,6 @@ table {
     margin: 1px;
     color: white;
 }
-<<<<<<< HEAD
 
 .ss div {
     font: 10px sans-serif;
@@ -148,5 +151,3 @@ table {
     margin: 1px;
     color: white;
 }
-=======
->>>>>>> 39f53e124f3b1eff9d61119a92ae866ca112bc7f
