@@ -171,8 +171,8 @@ var render = function(e) {
     //	stateData = JSON.parse(d)
     // });
     
-    //renderData()
-    //renderUS();
+    renderData();
+    renderUS();
 }
 ;
 
@@ -313,7 +313,7 @@ var renderUS = function(){
 //renderUS();
 
 
-var renderData = function(d){
+var renderData = function(d) {
     var info = JSON.parse(d);
     var stateKeys = Object.keys(info);
     var stateValues = Object.values(info);
@@ -322,7 +322,7 @@ var renderData = function(d){
     //if cde == :
     //id = stateName
 
-    var stats = function(y, year, scale){
+    var stats = function(y, year, scale) {
 	var state = d3.select(y);
 
 	us.selectAll("div")
