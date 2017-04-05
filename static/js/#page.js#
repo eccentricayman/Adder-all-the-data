@@ -103,6 +103,11 @@ var render = function(){
     //textBox.setAttribute("x")
     svg.appendChild( textBox );
 
+    $.get( "/stateData/<state>", {}, function(d){
+	stateData = JSON.parse(d)
+    });
+
+    renderData();
     renderUS();
 }
 
@@ -175,10 +180,6 @@ var renderUS = function(){
 }
 
 //renderUS();
-
-//$.get( "/stateData/", {}, function(d){
-//    stateData = JSON.parse(d)
-//});
 
 var renderData = function(d){
     var info = JSON.parse(d)
