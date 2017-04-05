@@ -1,4 +1,5 @@
 var nationalData;
+var stateData;
 var states;
 var xmlns = "http://www.w3.org/2000/svg"
 
@@ -42,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	}
     })
 
-    $.get( "/nationalData", {}, function(d){
+    $.get( "/nationalData/", {}, function(d){
         nationalData = JSON.parse(d)
     });
 
@@ -106,51 +107,12 @@ var render = function(){
     //textBox.setAttribute("x")
     svg.appendChild( textBox );
 
-
-    var renderUS = function(){
-        var nationalKeys = Object.keys(nationalData)
-        console.log(nationalData)
-        console.log(nationalData['Drugs'])
-        var years = Object.keys(nationalData['Drugs'])
-        //console.log(years)
-        
-        var get_values = function(year){
-	        values = Object.values(nationalData['Drugs'][year]['Rates'])
-	        return values;
-        }
-        
-        //console.log(get_values('2002'))
-        var renderNation = function(y, year, scale){
-	        var us = d3.select(y)
-            
-	        us.selectAll("div")
-	            .data(get_values(year))
-	            .enter()
-	            .append("div")
-	            .transition()
-	            .duration(2000)
-	            .style("width", function(i){
-		            //console.log(i*scale + " px")
-		            return i*scale + "px";
-	            })
-	            .text( function(a){
-		            return a;
-	            });
-        };
-        
-        renderNation(y2,2002,25);
-        renderNation(y3,2003,25);
-        renderNation(y4,2004,25);
-        renderNation(y5,2005,25);
-        renderNation(y6,2006,25);
-        renderNation(y7,2007,25);
-        renderNation(y8,2008,25);
-        renderNation(y9,2009,25);
-        renderNation(y10,2010,25);
-    };
-
-
+    $.get( "/stateData/<state>", {}, function(d){
+	stateData = JSON.parse(d)
+    });
     
+    renderData()
+    renderUS();
 }
 
 
@@ -179,8 +141,50 @@ var reset = function(){
 }
 
 
+var renderUS = function(){
+    console.log(nationalData)
+    var nationalKeys = Object.keys(nationalData)
+    //console.log(nationalData['Drugs'])
+    var years = Object.keys(nationalData['Drugs'])
+    //console.log(years)
+
+    var get_values = function(year){
+	values = Object.values(nationalData['Drugs'][year]['Rates'])
+	return values;
+    }
+
+    //console.log(get_values('2002'))
+    var renderNation = function(y, year, scale){
+	var us = d3.select(y)
+
+	us.selectAll("div")
+	    .data(get_values(year))
+	    .enter()
+	    .append("div")
+	    .transition()
+	    .duration(2000)
+	    .style("width", function(i){
+		//console.log(i*scale + " px")
+		return i*scale + "px";
+	    })
+	    .text( function(a){
+		return a;
+	    });
+    };
+
+    renderNation(y2,2002,25);
+    renderNation(y3,2003,25);
+    renderNation(y4,2004,25);
+    renderNation(y5,2005,25);
+    renderNation(y6,2006,25);
+    renderNation(y7,2007,25);
+    renderNation(y8,2008,25);
+    renderNation(y9,2009,25);
+    renderNation(y10,2010,25);
+}
 
 //renderUS();
+
 
 var renderData = function(d){
     var info = JSON.parse(d)
