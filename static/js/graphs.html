@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src="d3-src/d3.min.js" charset="utf-8"></script>
+    <title>Testing Bar Graphs</title>
+
+    <style>
+      .yearone div {
+      font: 10px sans-serif;
+      background-color: steelblue;
+      text-align: right;
+      padding: 3px;
+      margin: 1px;
+      color: white;
+      }
+
+      .yeartwo div {
+      font: 10px sans-serif;
+      background-color: pink;
+      text-align: right;
+      padding: 3px;
+      margin: 1px;
+      color: white;
+      }
+
+      #bold {
+      font-weight: bold;
+      }
+
+      #nums {
+      border: 1px solid black;
+      }
+
+      .chart rect {
+      fill: steelblue;
+      }
+
+      .chart text {
+      fill: white;
+      font: 10px sans-serif;
+      text-anchor: middle;
+      }
+
+      .bar {
+      fill: steelblue;
+      }
+
+      .axis text {
+      font: 10px sans-serif;
+      }
+
+      .axis path,
+      .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+      }
+
+      .x.axis path {
+      display: none;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <h1> <b style="color:steelblue">US Drug Averages </b></h1>
+    <svg class="chart" id="svg" xmlns="http://www.w3.org/2000/svg" style="border: 1px solid black" height="500" width="500">
+      <div class="yearone" id="y2"> </div>
+      <div class="yearone" id="y3"> </div>
+      <div class="yearone" id="y4"> </div>
+      <div class="yearone" id="y5"> </div>
+      <div class="yearone" id="y6"> </div>
+      <div class="yearone" id="y7"> </div>
+      <div class="yearone" id="y8"> </div>
+      <div class="yearone" id="y9"> </div>
+      <div class="yearone" id="y10"> </div>
+    </svg>
+    
+    <script src="test.js"></script>
+    
+  </body>
+</html>
