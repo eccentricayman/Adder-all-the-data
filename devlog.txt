@@ -57,3 +57,5 @@ kevinZ -- 2017-04-04 09:34:04 PM
 - Added the ability to go from the map to the state-based data. Can't get the data in right place, however
 aymanA -- 2017-04-05 01:39:10 AM
 - compartmentalizing js and map clone
+aymanA -- 2017-04-05 01:57:28 AM
+- human colons cut in half semicolons fixerino
