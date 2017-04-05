@@ -139,7 +139,10 @@ var render = function(e) {
     //Add new eventListener
     currentState.addEventListener("click", reset);
 
+    //table hide and reveal
     $("table").css("display", "initial");
+    $("#table-heading").css("display", "initial");
+    $("#state-table-heading").css("display", "initial");
 
     //kevins calculations
     // //Calculate Transformation
@@ -395,7 +398,7 @@ var reset = function(){
     //map doesnt wanna animate in second time around, ah well
     $(".animation-wrapper").css("opacity", 1);
     renderColor();
-    
+
     // //Loop through all the states, hiding them one by one
     // for( i=0; i < states.length; i++){
     //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
