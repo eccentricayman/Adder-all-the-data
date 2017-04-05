@@ -4,12 +4,10 @@ import numpy
 
 state_codes = {
     'Mississippi': 'MS',
-    'Northern Mariana Islands': 'MP',
     'Oklahoma':'OK',
     'Wyoming': 'WY',
     'Minnesota': 'MN',
     'Alaska': 'AK',
-    'American Samoa': 'AS',
     'Arkansas': 'AR',
     'New Mexico': 'NM',
     'Indiana': 'IN',
@@ -26,7 +24,6 @@ state_codes = {
     'Virginia': 'VA',
     'Oregon': 'OR',
     'Connecticut': 'CT',
-    'District of Columbia':'DC',
     'New Hampshire': 'NH',
     'Idaho': 'ID',
     'West Virginia':'WV',
@@ -37,7 +34,6 @@ state_codes = {
     'Georgia': 'GA',
     'North Dakota': 'ND',
     'Pennsylvania': 'PA',
-    'Puerto Rico': 'PR',
     'Florida': 'FL',
     'Hawaii': 'HI',
     'Kentucky': 'KY',
@@ -51,7 +47,6 @@ state_codes = {
     'South Dakota': 'SD',
     'Colorado': 'CO',
     'New Jersey': 'NJ',
-    'National': 'NA',
     'Washington': 'WA',
     'North Carolina': 'NC',
     'Maine': 'ME',
@@ -59,7 +54,7 @@ state_codes = {
     'Montana': 'MT',
     'Nevada': 'NV',
     'Delaware': 'DE',
-    'Guam': 'GU'
+    'District of Columbia': 'DC'
 }
 
 def get_state_codes():

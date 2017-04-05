@@ -19,15 +19,17 @@ def nationalData():
     #print json.dumps( data)
     return json.dumps( data )
 
-@app.route("/stateData/", methods=['GET'])
-def stateData(state):
+@app.route("/stateData/", methods=['GET','POST'])
+def stateData():
     data = {}
     states = interact.get_state_codes()
-    data['Drugs'] = interact.find_state_drugs(state)
-    data['Scores'] = interact.find_state_scores(state)
-    print data
+    for name, state in states.items():
+        if state != 'GA':
+            data[state] = {}
+            data[state]['Drugs'] = interact.find_state_drugs(state)
+            data[state]['Scores'] = interact.find_state_scores(state)
     #print state
-    return [json.dumps( data ), states, state]
+    return json.dumps( data )
 
 if __name__ == "__main__":
     app.debug == True

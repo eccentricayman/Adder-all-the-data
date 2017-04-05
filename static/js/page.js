@@ -167,12 +167,20 @@ var render = function(e) {
     // svg.appendChild( textBox );
 
 
+
+    $.get( "/stateData/", {}, function(d){
+    	stateData = JSON.parse(d)[this.getAttribute('id')];
+    });
+    
+    /*
     $.get( "/stateData/<state>", {}, function(d){
     	stateData = JSON.parse(d[0])
 	states = d[1]
 	state = d[2]
     });
+    */
 
+    
     renderData();
     renderUS();
 };
@@ -314,6 +322,7 @@ var renderUS = function(){
 //renderUS();
 
 var renderData = function(d){
+    console.log(stateData);
     var stateKeys = Object.keys(stateData);
     var stateValues = Object.values(stateData);
 

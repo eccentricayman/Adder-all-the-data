@@ -55,10 +55,18 @@ kevinZ -- 2017-04-04 08:44:19 PM
 - Began to work on js functions that allow for states to start moving
 kevinZ -- 2017-04-04 09:34:04 PM
 - Added the ability to go from the map to the state-based data. Can't get the data in right place, however
+yvonneC -- 2017-04-04 11:33:53 PM
+- added d3 horizontal graphs for national info, had trouble with retrieving data
+yvonneC -- 2017-04-05 00:00:31 AM
+- added graphs to html code and basic styling to css
+yvonneC -- 2017-04-05 00:38:28 AM
+- switched over to displaying state information, ran into problems retrieving data :(
 aymanA -- 2017-04-05 01:39:10 AM
 - compartmentalizing js and map clone
 aymanA -- 2017-04-05 01:57:28 AM
 - human colons cut in half semicolons fixerino
+yvonneC -- 2017-04-05 02:30:41 AM
+-refined and reorganized national data, renamed graphs, added school scores data in addition to drugs info
 aymanA -- 2017-04-05 02:29:54 AM
 - fixed merge and page
 aymanA -- 2017-04-05 03:44:45 AM
@@ -67,3 +75,5 @@ aymanA -- 2017-04-05 03:47:20 AM
 - merged again :'(
 aymanA -- 2017-04-05 05:17:11 AM
 - finished page transition, bbox sucks and bounding rect also sucks, i can't even
+yvonneC -- 2017-04-05 05:41:42 AM
+- finished state data but unable to view because problems with data retreival :(, assumed to work since it's similar to nation
