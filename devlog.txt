@@ -85,3 +85,5 @@ aymanA -- 2017-04-05 09:55:21 AM
 - hiding table
 aymanA -- 2017-04-05 10:13:50 AM
 - table styling
+aymanA -- 2017-04-05 10:22:42 AM
+- fixed js scaling

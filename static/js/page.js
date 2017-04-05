@@ -230,7 +230,7 @@ var render = function(e) {
 	            });
         };
 
-        var renderScores = function(y, year, scale){
+        var renderScores = function(y, year, scale, scale2){
 	        var us = d3.select(y)
 
 	        us.selectAll("div")
@@ -245,7 +245,12 @@ var render = function(e) {
 		                s = s*15
 		            }
 		            //console.log(i*scale + " px")
-		            return s*scale + "px";
+                    if (s > 500) {
+                        return (s * scale2) + "px";
+                    }
+                    else {
+		                return s*scale + "px";
+                    }
 	            })
 	            .text( function(a){
 		            for (s in nationalData['Scores'][year]['Averages']){
@@ -267,11 +272,11 @@ var render = function(e) {
         renderDrugs(y8,2008,30);
         renderDrugs(y9,2009,30);
         renderDrugs(y10,2010,30);
-        renderScores(sc6,2006,2);
-        renderScores(sc7,2007,2);
-        renderScores(sc8,2008,2);
-        renderScores(sc9,2009,2);
-        renderScores(sc10,2010,2);
+        renderScores(sc6,2006,2, 0.5);
+        renderScores(sc7,2007,2, 0.5);
+        renderScores(sc8,2008,2, 0.5);
+        renderScores(sc9,2009,2, 0.5);
+        renderScores(sc10,2010,2, 0.5);
         
     };
 
@@ -364,11 +369,11 @@ var render = function(e) {
         renderDrugs(s8,2008,30);
         renderDrugs(s9,2009,30);
         renderDrugs(s10,2010,30);
-        renderScores(st6,2006,2);
-        renderScores(st7,2007,2);
-        renderScores(st8,2008,2);
-        renderScores(st9,2009,2);
-        renderScores(st10,2010,2);
+        renderScores(st6,2006,2, 0.5);
+        renderScores(st7,2007,2, 0.5);
+        renderScores(st8,2008,2, 0.5);
+        renderScores(st9,2009,2, 0.5);
+        renderScores(st10,2010,2, 0.5);
         
     };
 
