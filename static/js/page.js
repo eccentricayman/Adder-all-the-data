@@ -74,7 +74,6 @@ var render = function(e) {
     var currentState;
 
     while (g5.lastElementChild) {
-        console.log("\n\n\n\n" +  g5.lastElementChild.getAttribute('id') + "\n\n\n");
         if( g5.lastElementChild.getAttribute('id') != e.srcElement.getAttribute('id') ) {
             g5.removeChild(g5.lastElementChild);
         }
