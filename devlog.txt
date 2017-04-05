@@ -67,3 +67,5 @@ aymanA -- 2017-04-05 03:47:20 AM
 - merged again :'(
 aymanA -- 2017-04-05 05:17:11 AM
 - finished page transition, bbox sucks and bounding rect also sucks, i can't even
+kevinZ -- 2017-04-05 06:56:53 AM
+- MAde multiple changes to how I get stateData. None of it seems to work
