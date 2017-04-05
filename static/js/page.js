@@ -167,9 +167,9 @@ var render = function(e) {
     // svg.appendChild( textBox );
 
 
-    //$.get( "/stateData/<state>", {}, function(d){
-    //	stateData = JSON.parse(d)
-    // });
+    $.get( "/stateData/"+this.getAttribute('id'), {}, function(d){
+    	stateData = JSON.parse(d)
+    });
     
     renderData();
     renderUS();
