@@ -77,3 +77,5 @@ aymanA -- 2017-04-05 05:17:11 AM
 - finished page transition, bbox sucks and bounding rect also sucks, i can't even
 yvonneC -- 2017-04-05 05:41:42 AM
 - finished state data but unable to view because problems with data retreival :(, assumed to work since it's similar to nation
+kevinZ -- 2017-04-05 06:56:53 AM
+- MAde multiple changes to how I get stateData. None of it seems to work
