@@ -86,6 +86,7 @@ var render = function(){
         var coords = e.getAttribute("d").split("l")[0].substring(1).split(',')//Get Rid of the M. I don't need it :D
 
         console.log(e.getBoundingClientRect())
+
         var X = Number(e.pageX); 
         var Y = Number(e.pageY);
         
