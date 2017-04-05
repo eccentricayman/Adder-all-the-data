@@ -25,14 +25,6 @@ def stateData():
     state = request.args.get('state')
     data['Drugs'] = interact.find_state_drugs(state)
     data['Scores'] = interact.find_state_scores(state)
-    '''
-    states = interact.get_state_codes()
-    for name, state in states.items():
-        if state != 'GA':
-            data[state] = {}
-            data[state]['Drugs'] = interact.find_state_drugs(state)
-            data[state]['Scores'] = interact.find_state_scores(state)
-    '''
     #print state
     return json.dumps( data )
 

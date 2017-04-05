@@ -4,6 +4,10 @@ $(".animation-wrapper").fadeIn(1500);
 var nationalData;
 var stateData;
 
+$.get( "/nationalData/", {}, function(d){
+        nationalData = JSON.parse(d);
+});
+
 var states;
 var state;
 var xmlns = "http://www.w3.org/2000/svg";
@@ -13,45 +17,41 @@ var map = document.getElementById("clone").cloneNode(true);
 var renderColor = function(e) {
     
     var get_color = function(percent) {
-	if ((percent === 0) || (percent === null)) {
-	    return "#ffffff";
-	}
-	var val = "#".concat(Math.round(percent*250).toString(16)).concat("ff").concat(Math.round(percent*250).toString(16));
-	//console.log(percent.toString().concat("\n").concat(val.toString()).concat("\n"));
-	return val;
+	    if ((percent === 0) || (percent === null)) {
+	        return "#ffffff";
+	    }
+	    var val = "#".concat(Math.round(percent*250).toString(16)).concat("ff").concat(Math.round(percent*250).toString(16));
+	    //console.log(percent.toString().concat("\n").concat(val.toString()).concat("\n"));
+	    return val;
     };
 
     $.ajax({
-	url: '/corrs/',
-	type: 'POST',
-	data: {},
-	success: function(i){
-	    var info = JSON.parse(i);
-	    keys = Object.keys(info);
+	    url: '/corrs/',
+	    type: 'POST',
+	    data: {},
+	    success: function(i){
+	        var info = JSON.parse(i);
+	        keys = Object.keys(info);
 
-	    var ctr = 0;
-	    for (ctr=0; ctr<keys.length; ctr++) {
-		id = "#" + keys[ctr];
-		if (id=="#GA") {
-		    console.log(info[keys[ctr]]);
-		}
-		d3.selectAll(id)
-		    .data([info[keys[ctr]]]);
-		//.attr("fill", function(d) { return get_color(d); })
+	        var ctr = 0;
+	        for (ctr=0; ctr<keys.length; ctr++) {
+		        id = "#" + keys[ctr];
+		        if (id=="#GA") {
+		            console.log(info[keys[ctr]]);
+		        }
+		        d3.selectAll(id)
+		            .data([info[keys[ctr]]]);
+		        //.attr("fill", function(d) { return get_color(d); })
+	        }
+
+	        d3.selectAll("path")
+		        .attr("fill", function(d) { 
+		            return get_color(d);
+		        });
+
+	        d3.select("#path67")
+		        .attr("fill", "none");
 	    }
-
-	    d3.selectAll("path")
-		.attr("fill", function(d) { 
-		    return get_color(d);
-		});
-
-	    d3.select("#path67")
-		.attr("fill", "none");
-	}
-    });
-
-    $.get( "/nationalData/", {}, function(d){
-        nationalData = JSON.parse(d);
     });
     
     //renderUS();
@@ -66,8 +66,6 @@ var renderColor = function(e) {
 };
 
 document.addEventListener("DOMContentLoaded", renderColor);
-
-renderColor();
 
 var render = function(e) {
 
@@ -150,10 +148,10 @@ var render = function(e) {
     //     console.log(e.getBoundingClientRect());
     //     var X = Number(e.pageX); 
     //     var Y = Number(e.pageY);
-        
+    
     //     var finalX = 100; // AYMAN *READ THIS*
     //     var finalY = 100; // THESE COORDS ARE WHERE THE STATE WILL END UP. CHANGE AS NEED BE
-        
+    
     //     return "translate("+(finalX - X + 200)+","+(finalY - Y + 100)+")";
     // };
 
@@ -171,160 +169,114 @@ var render = function(e) {
     
     
     /*
-    $.get( "/stateData/<state>", {}, function(d){
-    	stateData = JSON.parse(d[0])
-	states = d[1]
-	state = d[2]
-    });
+      $.get( "/stateData/<state>", {}, function(d){
+      stateData = JSON.parse(d[0])
+	  states = d[1]
+	  state = d[2]
+      });
     */
 
-<<<<<<< HEAD
-    
-    renderData();
-    renderUS();
-};
-
-var reset = function(){
-
-    //readd old map
-    $("body").prepend(map);
-
-    //re deep copy maperino
-    map = document.getElementById("clone").cloneNode(true);
-
-    //delete state
-    document.getElementById("state").parentNode.removeChild(document.getElementById("state"));
-    
-    //remove new heading
-    document.getElementById("state-heading").parentNode.removeChild(document.getElementById("state-heading"));
-
-    //map doesnt wanna animate in second time around, ah well
-    $(".animation-wrapper").css("opacity", 1);
-    renderColor();
-    
-    // //Loop through all the states, hiding them one by one
-    // for( i=0; i < states.length; i++){
-    //     if( states[i].getAttribute('id') != this.getAttribute('id') ){
-    //         states[i].setAttribute("display", "initial"); 
-    //     }
-    // }
-
-    // //Also hide path67 + path58
-    // document.getElementById('path67').setAttribute("display", "initial");
-    // document.getElementById('path58').setAttribute("display", "initial");
-
-    //Remove current eventListener
-    this.removeEventListener("click", reset);
-=======
->>>>>>> 5f2b4b4c078c80f8ec8bf2c80e0a4b53f5fc7c8b
-
     var renderUS = function(){
-    //console.log(nationalData)
-    var nationalKeys = Object.keys(nationalData)
-    console.log(nationalData);
-    var nationalKeys = Object.keys(nationalData);
-    //console.log(nationalData['Drugs'])
-    var years = Object.keys(nationalData['Drugs']);
-    //console.log(years)
+        console.log(nationalData)
+        var nationalKeys = Object.keys(nationalData)
+        //console.log(nationalData);
+        //console.log(nationalData['Drugs'])
+        var years = Object.keys(nationalData['Drugs']);
+        //console.log(years)
 
-    var get_drug_values = function(year){
-	values = Object.values(nationalData['Drugs'][year]['Rates'])
-	return values;
-    }
-    var get_score_values = function(year){
-	values = Object.values(nationalData['Scores'][year]['Averages'])
-	return values;
-    }
+        var get_drug_values = function(year){
+	        values = Object.values(nationalData['Drugs'][year]['Rates'])
+	        return values;
+        }
+        var get_score_values = function(year){
+	        values = Object.values(nationalData['Scores'][year]['Averages'])
+	        return values;
+        }
 
-    //console.log(Object.keys(nationalData['Drugs']['2006']['Rates']))
+        //console.log(Object.keys(nationalData['Drugs']['2006']['Rates']))
 
-    //console.log(get_values('2002'))
-    var renderDrugs = function(y, year, scale){
-	var us = d3.select(y)
+        //console.log(get_values('2002'))
+        var renderDrugs = function(y, year, scale){
+	        var us = d3.select(y)
 
-	us.selectAll("div")
-	    .data(get_drug_values(year))
-	    .enter()
-	    .append("div")
-	    .transition()
-	    .duration(2000)
-	    .style("width", function(i){
-		//console.log(i*scale + " px")
-		return i*scale + "px";
-	    })
-	    .text( function(a){
-		var t = a;
-		var drug;
-		for (drug in nationalData['Drugs'][year]['Rates']){
-		    //console.log(drug)
-		    //console.log(nationalData['Drugs'][year]['Rates'][drug])
-		    if (nationalData['Drugs'][year]['Rates'][drug] == a){
-			console.log(a)
-			t = drug+":"+a;
-		    }
-		}
-		return t;
-	    });
+	        us.selectAll("div")
+	            .data(get_drug_values(year))
+	            .enter()
+	            .append("div")
+	            .transition()
+	            .duration(2000)
+	            .style("width", function(i){
+		            //console.log(i*scale + " px")
+		            return i*scale + "px";
+	            })
+	            .text( function(a){
+		            var t = a;
+		            var drug;
+		            for (drug in nationalData['Drugs'][year]['Rates']){
+		                //console.log(drug)
+		                //console.log(nationalData['Drugs'][year]['Rates'][drug])
+		                if (nationalData['Drugs'][year]['Rates'][drug] == a){
+			                console.log(a)
+			                t = drug+":"+a;
+		                }
+		            }
+		            return t;
+	            });
+        };
+
+        var renderScores = function(y, year, scale){
+	        var us = d3.select(y)
+
+	        us.selectAll("div")
+	            .data(get_score_values(year))
+	            .enter()
+	            .append("div")
+	            .transition()
+	            .duration(2000)
+	            .style("width", function(i){
+		            var s = i;
+		            if (i < 5){
+		                s = s*15
+		            }
+		            //console.log(i*scale + " px")
+		            return s*scale + "px";
+	            })
+	            .text( function(a){
+		            for (s in nationalData['Scores'][year]['Averages']){
+		                if (nationalData['Scores'][year]['Averages'][s] == a){
+			                return s+":"+a;
+		                }
+		            }
+		            return a;
+	            });
+        };
+        
+        //renderDrugs(y2,2002,25);
+        //renderDrugs(y3,2003,25);
+        //renderDrugs(y4,2004,25);
+        //renderDrugs(y5,2005,25);
+        
+        renderDrugs(y6,2006,30);
+        renderDrugs(y7,2007,30);
+        renderDrugs(y8,2008,30);
+        renderDrugs(y9,2009,30);
+        renderDrugs(y10,2010,30);
+        renderScores(sc6,2006,2);
+        renderScores(sc7,2007,2);
+        renderScores(sc8,2008,2);
+        renderScores(sc9,2009,2);
+        renderScores(sc10,2010,2);
+        
     };
 
-    var renderScores = function(y, year, scale){
-	var us = d3.select(y)
 
-	us.selectAll("div")
-	    .data(get_score_values(year))
-	    .enter()
-	    .append("div")
-	    .transition()
-	    .duration(2000)
-	    .style("width", function(i){
-		var s = i;
-		if (i < 5){
-		    s = s*15
-		}
-		//console.log(i*scale + " px")
-		return s*scale + "px";
-	    })
-	    .text( function(a){
-		for (s in nationalData['Scores'][year]['Averages']){
-		    if (nationalData['Scores'][year]['Averages'][s] == a){
-			return s+":"+a;
-		    }
-		}
-		return a;
-	    });
-    };
-    
-    //renderDrugs(y2,2002,25);
-    //renderDrugs(y3,2003,25);
-    //renderDrugs(y4,2004,25);
-    //renderDrugs(y5,2005,25);
-    renderDrugs(y6,2006,30);
-    renderDrugs(y7,2007,30);
-    renderDrugs(y8,2008,30);
-    renderDrugs(y9,2009,30);
-    renderDrugs(y10,2010,30);
-    renderScores(sc6,2006,2);
-    renderScores(sc7,2007,2);
-    renderScores(sc8,2008,2);
-    renderScores(sc9,2009,2);
-    renderScores(sc10,2010,2);
-};
+    //renderUS();
 
-
-//renderUS();
-
-<<<<<<< HEAD
-var renderData = function(d){
-    console.log(stateData);
-    var stateKeys = Object.keys(stateData);
-    var stateValues = Object.values(stateData);
-=======
     var renderData = function(s){
->>>>>>> 5f2b4b4c078c80f8ec8bf2c80e0a4b53f5fc7c8b
 
-        $.get("/stateData/", {'state': s}, function(d){
-            stateData = JSON.parse(d);
-        });
+        setTimeout(console.log('timeout'), 1000);
+        
+        console.log(stateData);        
         
         var stateKeys = Object.keys(stateData);
         var stateValues = Object.values(stateData);
@@ -338,8 +290,7 @@ var renderData = function(d){
         }
         
         var get_drug_values = function(year){
-            values = Object.values(stateData['Scores'][year]['Rates'])
-            console.log(values)
+            values = Object.values(stateData['Drugs'][year]['Rates'])
 	        return values;
         }
         var get_score_values = function(year){
@@ -412,18 +363,18 @@ var renderData = function(d){
         renderScores(st8,2008,2);
         renderScores(st9,2009,2);
         renderScores(st10,2010,2);
+        
     };
-    
-    
-    
-    var s = this.getAttribute('id');
-    console.log(stateData)
-    console.log(nationalData)
-    renderData(s);
-    renderUS();
 
-}
-;
+    var s = this.getAttribute('id');
+    
+    $.get("/stateData/", {'state': s}, function(d){
+        stateData = JSON.parse(d);
+        renderData(s);
+        renderUS();
+        
+    });
+};
 
 var reset = function(){
 
@@ -457,14 +408,7 @@ var reset = function(){
     //Remove current eventListener
     this.removeEventListener("click", reset);
 
-    //Add new eventListener
-    this.addEventListener("click", render);
-
-    // //undo Transformation
-    // this.removeAttribute("transform");
-    
 };
-
 
 
 
