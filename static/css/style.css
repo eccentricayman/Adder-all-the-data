@@ -96,6 +96,10 @@ path:hover, circle:hover {
     float: right;
 }
 
+td {
+    font-family: 'Open Sans', 400;
+}
+
 .nation div {
     font: 10px sans-serif;
     background-color: steelblue;
